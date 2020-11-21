@@ -1,0 +1,9 @@
+body {
+    // links should be underlined unless they are buttons or menus
+    a:not(.button) {
+        text-decoration: underline;
+    }
+    a:not(nav) {
+        text-decoration: underline;
+    }
+}
