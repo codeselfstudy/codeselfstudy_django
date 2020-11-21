@@ -4,9 +4,9 @@ This module parses the Slack `/puzzle` command.
 TODO: it was copied from the old Flask app and needs to be fixed for Django.
 """
 import re
-import hmac
-import time
-import hashlib
+# import hmac
+# import time
+# import hashlib
 from os import environ
 from app.helpers.utilities import safe_list_get
 from urllib.parse import parse_qs

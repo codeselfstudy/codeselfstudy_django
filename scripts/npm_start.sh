@@ -3,12 +3,12 @@
 
 # delete the existing build files
 echo 'removing old build'
-rm -rf ./static/dist
+rm -rf ./codeselfstudy/static/dist
 
 # build the assets and watch for changes
 echo 'rebuilding the assets'
-npx parcel static/src/parcel-entry.js \
+npx parcel codeselfstudy/static/src/parcel-entry.js \
     --hmr-port 34471 \
-    --out-dir static/dist \
+    --out-dir codeselfstudy/static/dist \
     --public-url /static/dist/ \
     --out-file main

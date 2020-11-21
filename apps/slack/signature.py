@@ -5,7 +5,7 @@ import hashlib
 from os import environ
 # from urllib.parse import parse_qs
 
-# from helpers.utils import safe_list_get
+# from codeselfstudy.helpers.utils import safe_list_get
 
 
 def verify_signature(slack_signature, ts, request_body):

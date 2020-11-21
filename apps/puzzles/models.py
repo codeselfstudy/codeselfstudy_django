@@ -1,7 +1,7 @@
 from django.db import models
 
 from codeselfstudy.models import CreatedUpdatedModel
-from helpers.utils import create_random_slug
+from codeselfstudy.helpers.utils import create_random_slug
 
 
 class Puzzle(CreatedUpdatedModel):

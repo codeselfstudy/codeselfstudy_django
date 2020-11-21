@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 """
 import os
+import sys
 from typing import List
 from pathlib import Path
 from datetime import datetime
@@ -37,6 +38,7 @@ if DEBUG is False:
 
 # Build paths inside the project like this: BASE_DIR / "subdir".
 BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, os.path.join(BASE_DIR, "apps"))
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
@@ -54,13 +56,9 @@ ALLOWED_HOSTS: List[str] = [
     "codeselfstudy.com",
 ]
 
-MJML_EXEC_CMD = "./node_modules/.bin/mjml"
-
 INSTALLED_APPS = [
     # "django_bleach",
     # "simple_history",
-    # "crispy_forms",
-    # "crispy_tailwind",
     "pages.apps.PagesConfig",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -69,9 +67,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-
-CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
-CRISPY_TEMPLATE_PACK = "tailwind"
 
 if DEBUG is True:
     INSTALLED_APPS += ["django_extensions", "debug_toolbar"]
@@ -99,7 +94,7 @@ ROOT_URLCONF = "codeselfstudy.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [BASE_DIR / "codeselfstudy/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -108,7 +103,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 # make custom variables available to all templates
-                "helpers.context_processors.add_cachebuster_to_context",
+                "codeselfstudy.helpers.context_processors.add_cachebuster_to_context",
             ],
         },
     },
@@ -170,7 +165,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "codeselfstudy/static",
 ]
 STATIC_ROOT = "build"
 
@@ -203,7 +198,7 @@ LOGGING = {
 }
 
 # TODO: add Sentry logging code here after signing up for Sentry
-sentry_dsn=os.environ.get("SENTRY_DSN")
+sentry_dsn = os.environ.get("SENTRY_DSN")
 if DEBUG is not True and sentry_dsn is not None:
     sentry_sdk.init(
         dsn=sentry_dsn,
