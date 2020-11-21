@@ -22,4 +22,3 @@ class LanguageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Language, LanguageAdmin)
-# admin.site.register(LanguageVariantName, LanguageVariantNameInline)

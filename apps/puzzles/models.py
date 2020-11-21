@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 from taggit.managers import TaggableManager
 
 from codeselfstudy.models import CreatedUpdatedModel
@@ -31,29 +30,30 @@ class Puzzle(CreatedUpdatedModel):
         expert, advanced. Project Euler apparently has 20 difficulty levels.
         Those could be mapped to our ranking system.
         """
-        UNKNOWN = 0
-        ONE = 1  # easiest
-        TWO = 2
-        THREE = 3
-        FOUR = 4
-        FIVE = 5
-        SIX = 6
-        SEVEN = 7
-        EIGHT = 8
-        NINE = 9
-        TEN = 10  # hardest
+        LEVEL_UNKNOWN = 0
+        LEVEL_ONE = 1  # easiest
+        LEVEL_TWO = 2
+        LEVEL_THREE = 3
+        LEVEL_FOUR = 4
+        LEVEL_FIVE = 5
+        LEVEL_SIX = 6
+        LEVEL_SEVEN = 7
+        LEVEL_EIGHT = 8
+        LEVEL_NINE = 9
+        LEVEL_TEN = 10  # hardest
 
     title = models.CharField(max_length=200)
     is_active = models.BooleanField(default=True)
 
     source = models.CharField(
+        max_length=100,
         choices=PuzzleSources.choices,
         default=PuzzleSources.UNKNOWN,
     )
 
     difficulty = models.IntegerField(
         choices=DifficultyLevel.choices,
-        default=DifficultyLevel.UNKNOWN
+        default=DifficultyLevel.LEVEL_UNKNOWN
     )
 
     # TODO: Don't display this anywhere because it's raw user input.
@@ -75,10 +75,9 @@ class Puzzle(CreatedUpdatedModel):
         help_text="If the puzzle originated somewhere else, put the full URL here"
     )
     # a dump of the original data
-    # learn more here: https://pganalyze.com/blog/postgres-jsonb-django-python
-    original_raw_data = JSONField(
-        null=True,
+    original_raw_data = models.JSONField(
         blank=True,
+        default=dict,
         help_text="Any Python data type here will be turned into JSONB.",
     )
 
