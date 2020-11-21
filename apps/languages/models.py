@@ -1,6 +1,9 @@
 """
 The languages might be used in more than one part of the site, so they are in
 their own app.
+
+After more thought, we don't need this in the database right away, because it
+can be pulled out of the JSONB.
 """
 from django.db import models
 
