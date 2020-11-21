@@ -1,4 +1,5 @@
 from django.db import models
+from taggit.managers import TaggableManager
 
 from codeselfstudy.models import CreatedUpdatedModel
 from codeselfstudy.helpers.utils import create_random_slug
@@ -69,8 +70,13 @@ class Puzzle(CreatedUpdatedModel):
     original_votes = models.IntegerField(null=True, blank=True)
     original_stars = models.IntegerField(null=True, blank=True)
     original_unsafe_html = models.TextField(null=True, blank=True)
-    # tags = TODO
-    # category = TODO
+
+    # Warning: tags won't be saved when doing `commit=False` unless you do
+    # `.save_m2m()`. See the following link.
+    # https://django-taggit.readthedocs.io/en/latest/forms.html
+    # When adding tags, we can downcase them all to keep things simple.
+    tags = TaggableManager()
+    # category = TODO ? or is this even needed?
 
     # TODO: enable this
     # history = HistoricalRecords()

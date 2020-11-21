@@ -57,8 +57,9 @@ ALLOWED_HOSTS: List[str] = [
 ]
 
 INSTALLED_APPS = [
-    # "django_bleach",
-    # "simple_history",
+    "taggit",
+    "django_bleach",
+    "simple_history",
     "pages.apps.PagesConfig",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -209,3 +210,5 @@ if DEBUG is not True and sentry_dsn is not None:
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=False
     )
+
+TAGGIT_CASE_INSENSITIVE = True
