@@ -10,4 +10,5 @@ echo 'rebuilding the assets'
 npx parcel static/src/parcel-entry.js \
     --hmr-port 34471 \
     --out-dir static/dist \
+    --public-url /static/dist/ \
     --out-file main
