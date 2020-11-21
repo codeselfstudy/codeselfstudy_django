@@ -51,7 +51,7 @@ $ npm install
 
 ### Database
 
-If you don't have Postgres installed on your computer, you can run it from within a Docker container. See the [README.md](./development_server/docker/README.md) file in the `./development_server/docker/` directory.
+If you don't have Postgres installed on your computer, you can run it from within a Docker container. See the [README.md](./server_development/docker/README.md) file in the `./server_development/docker/` directory.
 
 After Postgres is running, migrate the database:
 
