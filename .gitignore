@@ -19,6 +19,7 @@ tags
 tags.*
 .idea/
 .vscode/
+.vim/
 *.sw[op]
 
 # Ruby
