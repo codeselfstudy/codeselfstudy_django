@@ -9,13 +9,13 @@ class LanguageVariantNameInline(admin.StackedInline):
 
 
 class LanguageAdmin(admin.ModelAdmin):
+    readonly_fields = ("created_at", "updated_at")
     fieldsets = [
         (None,               {"fields": ["name"]}),
-        # ("Meta Data", {"fields": ["created_at", "updated_at"]}),
+        ("Meta Data", {"fields": ["created_at", "updated_at"]}),
     ]
     inlines = [LanguageVariantNameInline]
-
-
+    # list_display = ("name", "")
 
 
 admin.site.register(Language, LanguageAdmin)
