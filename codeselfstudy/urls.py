@@ -19,6 +19,7 @@ from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", include("pages.urls")),
 ]
 
 if settings.DEBUG is True:

@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}Code Self Study{% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static "dist/main.css" %}?c={{ cache_buster }}">
+    <link rel="shortcut icon" href="{% static "images/favicon.ico" %}" type="image/x-icon">
+
+    {% block head_scripts %}{% endblock %}
+
+</head>
+<body>
+    {% include "global/includes/navbar.html" %}
+
+    {% block content %}{% endblock %}
+
+    {% include "global/includes/footer.html" %}
+
+    <script src="{% static "dist/main.js" %}?c={{ cache_buster }}"></script>
+
+    {% block footer_scripts %}{% endblock %}
+</body>
+</html>
