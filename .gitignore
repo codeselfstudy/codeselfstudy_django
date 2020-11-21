@@ -12,6 +12,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+pg/
+postgres/
 docker/pg/
 docker/postgres/
 
