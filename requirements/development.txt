@@ -3,7 +3,6 @@ Django==3.1.3
 django-simple-history==2.12.0
 django-crispy-forms==1.9.2
 crispy-tailwind==0.2.0
-django-mjml==0.10.2
 django-filter==2.4.0
 djangorestframework==3.12.2
 
@@ -12,6 +11,9 @@ django-debug-toolbar==3.1.1
 django-extensions==3.0.9
 
 # testing
+# pytest-django==4.1.0
+# pytest-xdist==2.1.0
+# pytest-cov==2.10.1
 # Faker==4.14.2
 
 # https://django-bleach.readthedocs.io/en/latest/settings.html#settings
@@ -19,11 +21,16 @@ django-extensions==3.0.9
 
 # database
 psycopg2==2.8.6
+# pgcli==3.0.0
 
 # utilities
 requests==2.24.0
 python-dotenv==0.15.0
 Markdown==3.3.3
+python-dotenv==0.15.0
+html2text==2020.1.16
+# https://django-bleach.readthedocs.io/en/latest/settings.html#settings
+django-bleach==0.6.1
 
 # code
 flake8==3.8.4

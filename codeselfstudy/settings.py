@@ -16,6 +16,10 @@ from typing import List
 from pathlib import Path
 from datetime import datetime
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # SECURITY WARNING: don"t run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG")) or False
 
@@ -27,7 +31,7 @@ if DEBUG_OVERRIDE is True:
     DEBUG = False
 print(f"####### DEBUG is {DEBUG} #######")
 
-if DEBUG is True:
+if DEBUG is False:
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
 

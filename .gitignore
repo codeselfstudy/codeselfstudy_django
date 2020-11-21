@@ -12,6 +12,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+docker/pg/
+docker/postgres/
 
 # Editors
 *~
