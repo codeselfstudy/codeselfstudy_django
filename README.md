@@ -18,6 +18,7 @@ Activate the virtual environment:
 
 ````text
 $ source .venv/bin/activate
+```
 
 Install the dependencies into the virtual environment:
 
