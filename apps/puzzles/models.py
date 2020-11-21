@@ -91,5 +91,11 @@ class Puzzle(CreatedUpdatedModel):
     # TODO: enable this after the model is stable
     # history = HistoricalRecords()
 
+    def save(self, *args, **kwargs):
+        """Create a slug when it's saved."""
+        self.slug = create_random_slug()
+        return super(Puzzle, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.title
+
