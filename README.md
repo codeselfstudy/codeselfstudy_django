@@ -16,7 +16,7 @@ $ python3 -m venv .venv
 
 Activate the virtual environment:
 
-````text
+```text
 $ source .venv/bin/activate
 ```
 
@@ -24,7 +24,7 @@ Install the dependencies into the virtual environment:
 
 ```text
 $ pip install -r requirements/development.txt
-````
+```
 
 When you are finished working on the site, you can deactivate the virtual environment with:
 
