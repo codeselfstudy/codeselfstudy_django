@@ -75,6 +75,14 @@ $ python manage.py runserver
 
 Then visit `localhost:8000`.
 
+To create a user account, run this command:
+
+```text
+$ python manage.py createsuperuser
+```
+
+Then log in at `localhost:8000/admin/`.
+
 ## Code Style
 
 Please enable prettier.js in your editor so that it autoformats JavaScript/TypeScript/CSS/scss code according to the rules in the `.prettierrc` file. If you're using vscode and the formatting doesn't work automatically, try adding [this extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
