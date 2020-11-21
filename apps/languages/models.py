@@ -12,9 +12,11 @@ class Language(CreatedUpdatedModel):
     Represents the official name of a language.
     """
     name = models.CharField(unique=True, max_length=100)
-    # description = models.TextField(
-    #     help_text="Some text about the language for its description page."
-    # )
+    description = models.TextField(
+        help_text="Some markdown text about the language for its description page.",
+        blank=True,
+        default="",
+    )
 
     def __str__(self):
         return self.name
