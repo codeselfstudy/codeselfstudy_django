@@ -4,12 +4,11 @@ This module parses the Slack `/puzzle` command.
 TODO: it was copied from the old Flask app and needs to be fixed for Django.
 """
 import re
-# import hmac
-# import time
-# import hashlib
 from os import environ
 from app.helpers.utilities import safe_list_get
 from urllib.parse import parse_qs
+
+from .languages import codewars_valid_languages
 
 # Example payload:
 #
@@ -98,84 +97,6 @@ def _generate_codewars_query(words):
     """Generates a mongo query based on the text."""
     # these were extracted from the mongo database
     # it's a dict for faster lookup
-    valid_languages = {
-        # these could probably be changed to something like:
-        # "vb": "vb",
-        # "visualbasic": "vb"
-        # "javascript": "javascript",
-        # "js": "javascript",
-        # that way alternate names would still work
-        "agda": "agda",
-        "bf": "bf",
-        "c": "c",
-        "clang": "c",
-        "cfml": "cfml",
-        "clojure": "clojure",
-        "cobol": "cobol",
-        "coffeescript": "coffeescript",
-        "commonlisp": "commonlisp",
-        "lisp": "commonlisp",
-        "coq": "coq",
-        "cpp": "cpp",
-        "c++": "cpp",
-        "crystal": "crystal",
-        "csharp": "csharp",
-        "c#": "csharp",
-        "dart": "dart",
-        "elixir": "elixir",
-        "elm": "elm",
-        "erlang": "erlang",
-        "erl": "erlang",
-        "factor": "factor",
-        "forth": "forth",
-        "fortran": "fortran",
-        "fsharp": "fsharp",
-        "f#": "fsharp",
-        "go": "go",
-        "golang": "go",
-        "groovy": "groovy",
-        "haskell": "haskell",
-        "haxe": "haxe",
-        "idris": "idris",
-        "java": "java",
-        "javascript": "javascript",
-        "js": "javascript",
-        "julia": "julia",
-        "kotlin": "kotlin",
-        "lean": "lean",
-        "lua": "lua",
-        "nasm": "nasm",
-        "nim": "nim",
-        "objc": "objc",
-        "objectivec": "objc",
-        "ocaml": "ocaml",
-        "perl": "perl",
-        "perl5": "perl",
-        "php": "php",
-        "powershell": "powershell",
-        "prolog": "prolog",
-        "purescript": "purescript",
-        "python": "python",
-        "r": "r",
-        "racket": "racket",
-        "scheme": "racket",
-        "raku": "raku",
-        "perl6": "raku",
-        "reason": "reason",
-        "reasonml": "reason",
-        "ruby": "ruby",
-        "rust": "rust",
-        "scala": "scala",
-        "shell": "shell",
-        "bash": "shell",
-        "solidity": "solidity",
-        "sql": "sql",
-        "swift": "swift",
-        "typescript": "typescript",
-        "ts": "typescript",
-        "vb": "vb",
-        "visualbasic": "vb",
-    }
     query = {
         "source": "codewars",
         "languages": []
@@ -190,7 +111,7 @@ def _generate_codewars_query(words):
             level, key = m.groups()
             query[key] = int(level)
         else:
-            language_choice = valid_languages.get(w, None)
+            language_choice = codewars_valid_languages.get(w, None)
             if language_choice:
                 query["languages"].append(language_choice)
 
