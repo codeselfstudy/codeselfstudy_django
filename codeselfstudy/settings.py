@@ -60,7 +60,13 @@ INSTALLED_APPS = [
     "taggit",
     "django_bleach",
     "simple_history",
+
     "pages.apps.PagesConfig",
+    "languages.apps.LanguagesConfig",
+    # "puzzles.apps.PuzzlesConfig",
+    # "discourse.apps.DiscourseConfig",
+    # "slack.apps.SlackConfig",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

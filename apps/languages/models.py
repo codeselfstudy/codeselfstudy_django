@@ -11,7 +11,7 @@ class Language(CreatedUpdatedModel):
     """
     Represents the official name of a language.
     """
-    name = models.CharField(unique=True)
+    name = models.CharField(unique=True, max_length=100)
     # description = models.TextField(
     #     help_text="Some text about the language for its description page."
     # )
@@ -30,7 +30,7 @@ class LanguageVariantName(CreatedUpdatedModel):
     c++ and cpp both refer to the same language. Perl6, Perl 6, and Raku all
     refer to the same language.
     """
-    variant_name = models.CharField(unique=True)
+    variant_name = models.CharField(unique=True, max_length=100)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
 
     def __str__(self):
