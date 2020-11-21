@@ -1,0 +1,270 @@
+- model: languages.language
+  pk: 1
+  fields:
+      name: agda
+      description:
+- model: languages.language
+  pk: 2
+  fields:
+      name: bf
+      description:
+- model: languages.language
+  pk: 3
+  fields:
+      name: c
+      description:
+- model: languages.language
+  pk: 4
+  fields:
+      name: cfml
+      description:
+- model: languages.language
+  pk: 5
+  fields:
+      name: clojure
+      description:
+- model: languages.language
+  pk: 6
+  fields:
+      name: cobol
+      description:
+- model: languages.language
+  pk: 7
+  fields:
+      name: coffeescript
+      description:
+- model: languages.language
+  pk: 8
+  fields:
+      name: commonlisp
+      description:
+- model: languages.language
+  pk: 9
+  fields:
+      name: coq
+      description:
+- model: languages.language
+  pk: 10
+  fields:
+      name: cpp
+      description:
+- model: languages.language
+  pk: 11
+  fields:
+      name: crystal
+      description:
+- model: languages.language
+  pk: 12
+  fields:
+      name: csharp
+      description:
+- model: languages.language
+  pk: 13
+  fields:
+      name: dart
+      description:
+- model: languages.language
+  pk: 14
+  fields:
+      name: elixir
+      description:
+- model: languages.language
+  pk: 15
+  fields:
+      name: elm
+      description:
+- model: languages.language
+  pk: 16
+  fields:
+      name: erlang
+      description:
+- model: languages.language
+  pk: 17
+  fields:
+      name: factor
+      description:
+- model: languages.language
+  pk: 18
+  fields:
+      name: forth
+      description:
+- model: languages.language
+  pk: 19
+  fields:
+      name: fortran
+      description:
+- model: languages.language
+  pk: 20
+  fields:
+      name: fsharp
+      description:
+- model: languages.language
+  pk: 21
+  fields:
+      name: go
+      description:
+- model: languages.language
+  pk: 22
+  fields:
+      name: groovy
+      description:
+- model: languages.language
+  pk: 23
+  fields:
+      name: haskell
+      description:
+- model: languages.language
+  pk: 24
+  fields:
+      name: haxe
+      description:
+- model: languages.language
+  pk: 25
+  fields:
+      name: idris
+      description:
+- model: languages.language
+  pk: 26
+  fields:
+      name: java
+      description:
+- model: languages.language
+  pk: 27
+  fields:
+      name: javascript
+      description:
+- model: languages.language
+  pk: 28
+  fields:
+      name: julia
+      description:
+- model: languages.language
+  pk: 29
+  fields:
+      name: kotlin
+      description:
+- model: languages.language
+  pk: 30
+  fields:
+      name: lean
+      description:
+- model: languages.language
+  pk: 31
+  fields:
+      name: lua
+      description:
+- model: languages.language
+  pk: 32
+  fields:
+      name: nasm
+      description:
+- model: languages.language
+  pk: 33
+  fields:
+      name: nim
+      description:
+- model: languages.language
+  pk: 34
+  fields:
+      name: objc
+      description:
+- model: languages.language
+  pk: 35
+  fields:
+      name: ocaml
+      description:
+- model: languages.language
+  pk: 36
+  fields:
+      name: perl
+      description:
+- model: languages.language
+  pk: 37
+  fields:
+      name: php
+      description:
+- model: languages.language
+  pk: 38
+  fields:
+      name: powershell
+      description:
+- model: languages.language
+  pk: 39
+  fields:
+      name: prolog
+      description:
+- model: languages.language
+  pk: 40
+  fields:
+      name: purescript
+      description:
+- model: languages.language
+  pk: 41
+  fields:
+      name: python
+      description:
+- model: languages.language
+  pk: 42
+  fields:
+      name: r
+      description:
+- model: languages.language
+  pk: 43
+  fields:
+      name: racket
+      description:
+- model: languages.language
+  pk: 44
+  fields:
+      name: raku
+      description:
+- model: languages.language
+  pk: 45
+  fields:
+      name: reason
+      description:
+- model: languages.language
+  pk: 46
+  fields:
+      name: ruby
+      description:
+- model: languages.language
+  pk: 47
+  fields:
+      name: rust
+      description:
+- model: languages.language
+  pk: 48
+  fields:
+      name: scala
+      description:
+- model: languages.language
+  pk: 49
+  fields:
+      name: shell
+      description:
+- model: languages.language
+  pk: 50
+  fields:
+      name: solidity
+      description:
+- model: languages.language
+  pk: 51
+  fields:
+      name: sql
+      description:
+- model: languages.language
+  pk: 52
+  fields:
+      name: swift
+      description:
+- model: languages.language
+  pk: 53
+  fields:
+      name: typescript
+      description:
+- model: languages.language
+  pk: 54
+  fields:
+      name: vb
+      description:
