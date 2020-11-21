@@ -75,6 +75,7 @@ class Puzzle(CreatedUpdatedModel):
         help_text="If the puzzle originated somewhere else, put the full URL here"
     )
     # a dump of the original data
+    # learn more here: https://pganalyze.com/blog/postgres-jsonb-django-python
     original_raw_data = JSONField(
         null=True,
         blank=True,
@@ -86,9 +87,8 @@ class Puzzle(CreatedUpdatedModel):
     # https://django-taggit.readthedocs.io/en/latest/forms.html
     # When adding tags, we can downcase them all to keep things simple.
     tags = TaggableManager()
-    # category = TODO ? or is this even needed?
 
-    # TODO: enable this
+    # TODO: enable this after the model is stable
     # history = HistoricalRecords()
 
     def __str__(self):
