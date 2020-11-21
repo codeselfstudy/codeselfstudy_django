@@ -27,9 +27,11 @@ $content-heading-color: $green;
 $link: $purple;
 $link-hover: $yellow;
 $link-active: lighten($yellow, 15%);
+$text-strong: lighten($text, 15%);
 
 // backgrounds
 $background: $tomorrow-night;
 $body-background-color: $tomorrow-night;
 $code-background: $black-ter;
 $pre-background: $code-background;
+$footer-background-color: $black-ter;

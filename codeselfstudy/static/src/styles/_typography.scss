@@ -1,9 +1,17 @@
 body {
     // links should be underlined unless they are buttons or menus
-    a:not(.button) {
-        text-decoration: underline;
-    }
+    a:not(.button),
+    a:not(footer.page-footer),
     a:not(nav) {
         text-decoration: underline;
+    }
+
+    .page-footer {
+        color: $grey-light;
+    }
+
+    .terminal {
+        color: lighten($green, 15%);
+        font-weight: bold;
     }
 }
