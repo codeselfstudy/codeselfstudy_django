@@ -3,6 +3,7 @@ TMP/
 *_PENDING_DELETION
 logs/*
 !logs/.keep
+seed_data/
 
 # Environments
 .env

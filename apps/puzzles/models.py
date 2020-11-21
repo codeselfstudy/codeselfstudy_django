@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 from taggit.managers import TaggableManager
 
 from codeselfstudy.models import CreatedUpdatedModel
@@ -8,6 +9,9 @@ from codeselfstudy.helpers.utils import create_random_slug
 class Puzzle(CreatedUpdatedModel):
 
     class PuzzleSources(models.TextChoices):
+        """
+        The site to send people to to solve the puzzle.
+        """
         CODEWARS = "Codewars", "Codewars"
         LEETCODE = "Leetcode", "Leetcode"
         PROJECT_EULER = "Project Euler", "Project Euler"
@@ -16,6 +20,8 @@ class Puzzle(CreatedUpdatedModel):
 
     class DifficultyLevel(models.IntegerChoices):
         """
+        This is our own ranking system.
+
         1 is the easiest, 10 is the hardest. Maybe it could be shown visually
         on a bar with green, yellow, and red gradient kind of like this:
         https://tinkersphere.com/4740-large_default/led-bar-graph-red-yellow-green.jpg
@@ -23,6 +29,7 @@ class Puzzle(CreatedUpdatedModel):
         Codewars has 8 levels with 1 being the hardest. Leetcode has hard,
         medium, and easy. I think Hackerrank has: easy, intermediate, hard,
         expert, advanced. Project Euler apparently has 20 difficulty levels.
+        Those could be mapped to our ranking system.
         """
         UNKNOWN = 0
         ONE = 1  # easiest
@@ -49,13 +56,13 @@ class Puzzle(CreatedUpdatedModel):
         default=DifficultyLevel.UNKNOWN
     )
 
-    # TODO: Don't display this anywhere because it comes from the Internet.
-    unsafe_html = models.TextField()
+    # TODO: Don't display this anywhere because it's raw user input.
+    unsafe_description = models.TextField()
 
     # TODO: It should be bleached and cooked on save.
-    cooked_html = models.TextField(help_text="The description of the puzzle")
+    cooked_description = models.TextField(help_text="The description of the puzzle")
 
-    # TODO add a unique, unguessable slug
+    # TODO add a unique slug (not a "friendly-URL")
     slug = models.SlugField(
         default=create_random_slug,
         max_length=255,
@@ -67,9 +74,12 @@ class Puzzle(CreatedUpdatedModel):
         blank=True,
         help_text="If the puzzle originated somewhere else, put the full URL here"
     )
-    original_votes = models.IntegerField(null=True, blank=True)
-    original_stars = models.IntegerField(null=True, blank=True)
-    original_unsafe_html = models.TextField(null=True, blank=True)
+    # a dump of the original data
+    original_raw_data = JSONField(
+        null=True,
+        blank=True,
+        help_text="Any Python data type here will be turned into JSONB.",
+    )
 
     # Warning: tags won't be saved when doing `commit=False` unless you do
     # `.save_m2m()`. See the following link.
@@ -80,3 +90,6 @@ class Puzzle(CreatedUpdatedModel):
 
     # TODO: enable this
     # history = HistoricalRecords()
+
+    def __str__(self):
+        return self.title
