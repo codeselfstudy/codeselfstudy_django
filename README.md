@@ -26,7 +26,7 @@ alias m='python manage.py'
 
 Wherever you see `m` in this document, it means `python manage.py`.
 
-If you don't have Postgres installed on your computer, you can run it from within a Docker container. See the [README.md](./docker/README.md) file in the `./docker/` directory.
+If you don't have Postgres installed on your computer, you can run it from within a Docker container. See the [README.md](./development_server/docker/README.md) file in the `./development_server/docker/` directory.
 
 After Postgres is running, migrate the database and run the app:
 
