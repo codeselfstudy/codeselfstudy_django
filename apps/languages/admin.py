@@ -18,7 +18,7 @@ class LanguageAdmin(admin.ModelAdmin):
     list_display = ("name", "variant_names")
 
     def variant_names(self, obj):
-        return [n for n in obj.languagevariantname_set.all()]
+        return len(obj.languagevariantname_set.all())
 
 
 admin.site.register(Language, LanguageAdmin)
