@@ -43,8 +43,6 @@ If you're using vscode, it should automatically give you formatting hints. If th
 
 If you use vscode, you can also add [this extension](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig), and it will automatically follow this project's `.editorconfig` guidelines.
 
-TODO: automate formatting/linting with a git hook or similar method.
-
 ## Running
 
 Run the frontend and backend servers
