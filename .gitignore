@@ -22,7 +22,6 @@ docker/postgres/
 tags
 tags.*
 .idea/
-.vscode/
 .vim/
 *.sw[op]
 
