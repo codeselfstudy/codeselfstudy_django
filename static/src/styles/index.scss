@@ -1,2 +1,34 @@
 // TODO: import Bulma or whatever
 // This Django site will just be an API for now though.
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+
+// based on Tomorrow Night colors
+$primary: #83a1c1;
+$secondary: #ab93be;
+$tertiary: #b6be55;
+$warning: #eec765;
+$danger: #c96764;
+$background: #26292c;
+$background-secondary: #212121;
+
+body {
+    font-family: "Source Code Pro", monospace;
+    font-size: 1rem;
+    background-color: $background;
+    color: $primary;
+
+    a {
+        color: $secondary;
+    }
+    h1 {
+        color: $tertiary;
+    }
+}
+
+footer {
+    padding-top: 67px;
+    hr {
+        color: $background-secondary;
+    }
+}
