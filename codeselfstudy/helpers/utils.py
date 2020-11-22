@@ -3,6 +3,7 @@ import re
 import secrets
 from uuid import uuid4
 from urllib.parse import urlparse
+import logging
 
 import bleach
 from bs4 import BeautifulSoup
@@ -12,6 +13,8 @@ from markdown import markdown
 # Another option is to do the syntax highlighting on the frontend.
 from markdown.extensions import fenced_code, tables  # type: ignore  # noqa: F401
 from django.template.defaultfilters import slugify
+
+log = logging.getLogger(__name__)
 
 
 def safe_list_get(lst, idx, default=None):
@@ -65,13 +68,34 @@ def clean_user_input(content):
     bleached = bleach.clean(
         content,
         strip=True,
-        tags=["a", "abbr", "acronym", "b", "blockquote", "code", "em", "i", "img", "li", "ol", "strong", "ul"],
+        tags=[
+            "a",
+            "abbr",
+            "acronym",
+            "b",
+            "blockquote",
+            "code",
+            "em",
+            "i",
+            "img",
+            "li",
+            "ol",
+            "strong",
+            "ul",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "p",
+        ],
         attributes={"img": ["src"]}
     )
 
     # Just to make sure no images are loaded from anywhere other than approved
     # sites.
-    soup = BeautifulSoup(bleached)
+    soup = BeautifulSoup(bleached, "html.parser")
     imgs = soup.select("img")
     allowed_image_hosts = [
         "codeselfstudy.com",
@@ -80,18 +104,22 @@ def clean_user_input(content):
 
     for img in imgs:
         parsed_url = urlparse(img["src"])
+        log.info(f"parsed url: {parsed_url}")
         if parsed_url.netloc and parsed_url.netloc not in allowed_image_hosts:
+            log.info("yes")
             # delete the element
             img.decompose()
+
+    return str(soup)
 
 
 def cook_markdown(md):
     """
     Safely turn markdown into HTML.
     """
-    cleaned = clean_user_input(md)
-    html = markdown(cleaned, extensions=["fenced_code", "tables"])
-    return html
+    html = markdown(md, extensions=["fenced_code", "tables"])
+    cleaned = clean_user_input(html)
+    return cleaned
 
 
 def fix_project_euler_relative_paths(raw_description):

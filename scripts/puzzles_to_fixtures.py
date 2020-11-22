@@ -20,10 +20,12 @@ def calculate_codewars_difficulty(rank):
     kyu 1 -> level 10
     """
     log.info(f"rank: {rank}")
+
     if rank:
         kyu = abs(rank)
     else:
         kyu = 0
+
     return {
         1: 10,
         2: randint(8, 9),
@@ -93,6 +95,7 @@ if __name__ == "__main__":
             fixture_data = create_projecteuler_obj(idx, p)
             output.append(fixture_data)
         else:
+            log.error(f"failed to add idx {idx} with data: {p}")
             failed.append({"idx": idx, "puzzle": p})
 
     with open("codewars_projecteuler_puzzles.json", "w") as f:
