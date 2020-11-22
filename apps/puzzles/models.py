@@ -20,26 +20,21 @@ class DifficultyLevel(models.IntegerChoices):
     """
     This is our own ranking system.
 
-    1 is the easiest, 10 is the hardest. Maybe it could be shown visually
+    1 is the easiest, 4 is the hardest. Maybe it could be shown visually
     on a bar with green, yellow, and red gradient kind of like this:
     https://tinkersphere.com/4740-large_default/led-bar-graph-red-yellow-green.jpg
 
     Codewars has 8 levels with 1 being the hardest. Leetcode has hard,
-    medium, and easy. I think Hackerrank has: easy, intermediate, hard,
-    expert, advanced. Project Euler apparently has 20 difficulty levels.
-    Those could be mapped to our ranking system.
+    medium, and easy. I think Hackerrank either has: easy, intermediate,
+    hard, expert, and advanced, or just 3 levels -- it's unclear. Project
+    Euler apparently has 20 difficulty levels. Those could be mapped to our
+    ranking system.
     """
     LEVEL_UNKNOWN = 0
     LEVEL_ONE = 1  # easiest
     LEVEL_TWO = 2
     LEVEL_THREE = 3
-    LEVEL_FOUR = 4
-    LEVEL_FIVE = 5
-    LEVEL_SIX = 6
-    LEVEL_SEVEN = 7
-    LEVEL_EIGHT = 8
-    LEVEL_NINE = 9
-    LEVEL_TEN = 10  # hardest
+    LEVEL_FOUR = 4  # hardest
 
 
 class Puzzle(CreatedUpdatedModel):
