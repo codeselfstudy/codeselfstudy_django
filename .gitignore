@@ -1,5 +1,6 @@
 # tmp files
 TMP/
+NOTES_TMP.md
 *_PENDING_DELETION
 logs/*
 !logs/.keep

@@ -1,10 +1,16 @@
+"""
+Thoughts: only codewars has an extensive list of languages, so let's not make
+things too complicated for now.
+"""
 # A language might be referred to by more than one name.
 codewars_valid_languages = {
     "agda": "agda",
     "bf": "bf",
+    "brainfuck": "bf",
     "c": "c",
     "clang": "c",
     "cfml": "cfml",
+    "coldfusion": "cfml",
     "clojure": "clojure",
     "cobol": "cobol",
     "coffeescript": "coffeescript",
@@ -17,9 +23,12 @@ codewars_valid_languages = {
     "csharp": "csharp",
     "c#": "csharp",
     "dart": "dart",
+    "flutter": "dart",
     "elixir": "elixir",
+    "ex": "elixir",
     "elm": "elm",
     "erlang": "erlang",
+    "beam": "erlang",
     "erl": "erlang",
     "factor": "factor",
     "forth": "forth",
@@ -50,8 +59,12 @@ codewars_valid_languages = {
     "powershell": "powershell",
     "prolog": "prolog",
     "purescript": "purescript",
+    "ps": "purescript",
     "python": "python",
+    "python3": "python",
+    "python2": "python",
     "r": "r",
+    "rlang": "r",
     "racket": "racket",
     "scheme": "racket",
     "raku": "raku",
@@ -69,5 +82,25 @@ codewars_valid_languages = {
     "typescript": "typescript",
     "ts": "typescript",
     "vb": "vb",
+    "vba": "vb",
     "visualbasic": "vb",
 }
+
+
+# Leetcode languages
+# c++
+# java
+# python
+# c
+# c#
+# javascript
+# ruby
+# swift
+# go
+# scala
+# kotlin
+# rust
+# php
+# typescript
+
+# Project Euler doesn't have languages
