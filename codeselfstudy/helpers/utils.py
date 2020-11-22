@@ -14,7 +14,7 @@ from markdown.extensions import fenced_code, tables  # type: ignore  # noqa: F40
 from django.template.defaultfilters import slugify
 
 
-def safe_list_get(lst, idx, default):
+def safe_list_get(lst, idx, default=None):
     """
     Safely get a list element without risking an error.
 
