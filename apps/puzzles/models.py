@@ -1,5 +1,5 @@
 from django.db import models
-from taggit.managers import TaggableManager
+# from taggit.managers import TaggableManager
 
 from codeselfstudy.models import CreatedUpdatedModel
 from codeselfstudy.helpers.utils import create_random_slug
@@ -85,7 +85,8 @@ class Puzzle(CreatedUpdatedModel):
     # `.save_m2m()`. See the following link.
     # https://django-taggit.readthedocs.io/en/latest/forms.html
     # When adding tags, we can downcase them all to keep things simple.
-    tags = TaggableManager()
+    # TODO: I removed tags for now, because it isn't needed in the first version
+    # tags = TaggableManager()
 
     # TODO: enable this after the model is stable
     # history = HistoricalRecords()
