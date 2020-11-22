@@ -2,45 +2,47 @@ from django.db import models
 # from taggit.managers import TaggableManager
 
 from codeselfstudy.models import CreatedUpdatedModel
-from codeselfstudy.helpers.utils import create_random_slug, cook_markdown
+from codeselfstudy.helpers.utils import create_random_slug, cook_markdown, fix_project_euler_relative_paths
+
+
+class PuzzleSources(models.TextChoices):
+    """
+    The site to send people to to solve the puzzle.
+    """
+    CODEWARS = "Codewars", "Codewars"
+    LEETCODE = "Leetcode", "Leetcode"
+    PROJECT_EULER = "Project Euler", "Project Euler"
+    CODESELFSTUDY = "Code Self Study", "Code Self Study"
+    UNKNOWN = "Unknown", "Unknown"
+
+
+class DifficultyLevel(models.IntegerChoices):
+    """
+    This is our own ranking system.
+
+    1 is the easiest, 10 is the hardest. Maybe it could be shown visually
+    on a bar with green, yellow, and red gradient kind of like this:
+    https://tinkersphere.com/4740-large_default/led-bar-graph-red-yellow-green.jpg
+
+    Codewars has 8 levels with 1 being the hardest. Leetcode has hard,
+    medium, and easy. I think Hackerrank has: easy, intermediate, hard,
+    expert, advanced. Project Euler apparently has 20 difficulty levels.
+    Those could be mapped to our ranking system.
+    """
+    LEVEL_UNKNOWN = 0
+    LEVEL_ONE = 1  # easiest
+    LEVEL_TWO = 2
+    LEVEL_THREE = 3
+    LEVEL_FOUR = 4
+    LEVEL_FIVE = 5
+    LEVEL_SIX = 6
+    LEVEL_SEVEN = 7
+    LEVEL_EIGHT = 8
+    LEVEL_NINE = 9
+    LEVEL_TEN = 10  # hardest
 
 
 class Puzzle(CreatedUpdatedModel):
-
-    class PuzzleSources(models.TextChoices):
-        """
-        The site to send people to to solve the puzzle.
-        """
-        CODEWARS = "Codewars", "Codewars"
-        LEETCODE = "Leetcode", "Leetcode"
-        PROJECT_EULER = "Project Euler", "Project Euler"
-        CODESELFSTUDY = "Code Self Study", "Code Self Study"
-        UNKNOWN = "Unknown", "Unknown"
-
-    class DifficultyLevel(models.IntegerChoices):
-        """
-        This is our own ranking system.
-
-        1 is the easiest, 10 is the hardest. Maybe it could be shown visually
-        on a bar with green, yellow, and red gradient kind of like this:
-        https://tinkersphere.com/4740-large_default/led-bar-graph-red-yellow-green.jpg
-
-        Codewars has 8 levels with 1 being the hardest. Leetcode has hard,
-        medium, and easy. I think Hackerrank has: easy, intermediate, hard,
-        expert, advanced. Project Euler apparently has 20 difficulty levels.
-        Those could be mapped to our ranking system.
-        """
-        LEVEL_UNKNOWN = 0
-        LEVEL_ONE = 1  # easiest
-        LEVEL_TWO = 2
-        LEVEL_THREE = 3
-        LEVEL_FOUR = 4
-        LEVEL_FIVE = 5
-        LEVEL_SIX = 6
-        LEVEL_SEVEN = 7
-        LEVEL_EIGHT = 8
-        LEVEL_NINE = 9
-        LEVEL_TEN = 10  # hardest
 
     title = models.CharField(max_length=200)
     is_active = models.BooleanField(default=True)
@@ -97,7 +99,11 @@ class Puzzle(CreatedUpdatedModel):
 
         (The slug is handled above.)
         """
-        self.cooked_description = cook_markdown(self.unsafe_description)
+        if self.source == PuzzleSources.PROJECT_EULER:
+            description = fix_project_euler_relative_paths(self.unsafe_description)
+        else:
+            description = self.unsafe_description
+        self.cooked_description = cook_markdown(description)
         return super(Puzzle, self).save(*args, **kwargs)
 
     def __str__(self):
