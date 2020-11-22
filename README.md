@@ -63,6 +63,12 @@ $ python manage.py migrate
 
 It uses pytest. There is an intro to pytest [here](https://djangostars.com/blog/django-pytest-testing/).
 
+To run the tests, type:
+
+```text
+$ make test
+```
+
 ## Running the Website
 
 Run the frontend server by typing this in a terminal:
