@@ -11,13 +11,10 @@ django-debug-toolbar==3.1.1
 django-extensions==3.0.9
 
 # testing
-# pytest-django==4.1.0
-# pytest-xdist==2.1.0
-# pytest-cov==2.10.1
-# Faker==4.14.2
-
-# https://django-bleach.readthedocs.io/en/latest/settings.html#settings
-# django-bleach==0.6.1
+pytest-django==4.1.0
+pytest-xdist==2.1.0
+pytest-cov==2.10.1
+Faker==4.14.2
 
 # database
 psycopg2==2.8.6
