@@ -2,8 +2,6 @@ import json
 import logging
 from random import randint
 
-# import yaml
-
 logging.basicConfig(level=logging.DEBUG, filename="fixtures.log")
 log = logging
 
@@ -59,7 +57,7 @@ def create_codewars_obj(pk, puzzle):
 
 
 def create_projecteuler_obj(pk, puzzle):
-    difficulty = 0  # TODO: fetch difficulty levels later
+    difficulty = 0
 
     return {
         "model": "puzzles.puzzle",
@@ -89,11 +87,11 @@ if __name__ == "__main__":
     for idx, p in enumerate(puzzles):
         log.info(f"processing puzzle #{idx}: {p['url']}")
         if p.get("source") == "codewars":
-            the_yaml = create_codewars_obj(idx, p)
-            output.append(the_yaml)
+            fixture_data = create_codewars_obj(idx, p)
+            output.append(fixture_data)
         elif p.get("source") == "projecteuler":
-            the_yaml = create_projecteuler_obj(idx, p)
-            output.append(the_yaml)
+            fixture_data = create_projecteuler_obj(idx, p)
+            output.append(fixture_data)
         else:
             failed.append({"idx": idx, "puzzle": p})
 
@@ -103,12 +101,3 @@ if __name__ == "__main__":
     with open("failed.json", "w") as f:
         f.write(json.dumps(failed))
 
-# sample PE record
-# {
-#         "_id" : ObjectId("5f9f462baa90b222ec6f1c4f"),
-#         "source" : "projecteuler",
-#         "body" : "<p>If a box contains twenty-one coloured discs, composed of fifteen blue discs and six red discs, and two discs were taken at random, it can be seen that the probability of taking two blue discs, P(BB) = (15/21)×(14/20) = 1/2.</p><p>The next such arrangement, for which there is exactly 50% chance of taking two blue discs at random, is a box containing eighty-five blue discs and thirty-five red discs.</p><p>By finding the first arrangement to contain over 10<sup>12</sup> = 1,000,000,000,000 discs in total, determine the number of blue discs that the box would contain.</p>",
-#         "id" : "100",
-#         "title" : "Arranged probability",
-#         "url" : "https://projecteuler.net/problem=100"
-# }
