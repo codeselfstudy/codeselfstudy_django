@@ -59,6 +59,10 @@ After Postgres is running, migrate the database:
 $ python manage.py migrate
 ```
 
+## Testing
+
+It uses pytest. There is an intro to pytest [here](https://djangostars.com/blog/django-pytest-testing/).
+
 ## Running the Website
 
 Run the frontend server by typing this in a terminal:
