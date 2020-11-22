@@ -2,7 +2,7 @@ from django.db import models
 # from taggit.managers import TaggableManager
 
 from codeselfstudy.models import CreatedUpdatedModel
-from codeselfstudy.helpers.utils import create_random_slug
+from codeselfstudy.helpers.utils import create_random_slug, cook_markdown
 
 
 class Puzzle(CreatedUpdatedModel):
@@ -92,8 +92,12 @@ class Puzzle(CreatedUpdatedModel):
     # history = HistoricalRecords()
 
     def save(self, *args, **kwargs):
-        """Create a slug when it's saved."""
-        self.slug = create_random_slug()
+        """
+        Cook the markdown when it's saved.
+
+        (The slug is handled above.)
+        """
+        self.cooked_description = cook_markdown(self.unsafe_description)
         return super(Puzzle, self).save(*args, **kwargs)
 
     def __str__(self):

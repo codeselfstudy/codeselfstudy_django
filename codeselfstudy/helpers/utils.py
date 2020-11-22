@@ -2,6 +2,12 @@
 import secrets
 from uuid import uuid4
 
+import bleach
+from markdown import markdown
+# markdown has a codehilite extension that can be enabled. If we want to try it, the docs are here:
+# https://python-markdown.github.io/extensions/code_hilite/
+# Another option is to do the syntax highlighting on the frontend.
+from markdown.extensions import fenced_code, tables  # type: ignore  # noqa: F401
 from django.template.defaultfilters import slugify
 
 
@@ -44,3 +50,15 @@ def create_entity_id(num_bytes: int):
     "l9qR1wvRiM6HfS86gBV79EM9Plb5Z0s8eshFXo6nHhs"
     """
     return secrets.token_urlsafe(num_bytes)
+
+
+def cook_markdown(md):
+    """
+    Bleach the input and turn markdown into HTML.
+
+    By default, bleach allows these tags:
+    ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'strong', 'ul']
+    """
+    bleached = bleach.clean(md, strip=True)
+    html = markdown(bleached, extensions=["fenced_code", "tables"])
+    return html
