@@ -30,7 +30,7 @@ DEBUG = bool(os.environ.get("DEBUG")) or False
 DEBUG_OVERRIDE = bool(os.environ.get("DEBUG_OVERRIDE"))
 if DEBUG_OVERRIDE is True:
     DEBUG = False
-print(f"####### DEBUG is {DEBUG} #######")
+# print(f"####### DEBUG is {DEBUG} #######")
 
 if DEBUG is False:
     import sentry_sdk

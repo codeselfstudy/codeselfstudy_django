@@ -31,10 +31,10 @@ class DifficultyLevel(models.IntegerChoices):
     ranking system.
     """
     LEVEL_UNKNOWN = 0
-    LEVEL_ONE = 1  # easiest
-    LEVEL_TWO = 2
-    LEVEL_THREE = 3
-    LEVEL_FOUR = 4  # hardest
+    LEVEL_ONE = 1  # basic ("hello world")
+    LEVEL_TWO = 2  # easy
+    LEVEL_THREE = 3  # medium
+    LEVEL_FOUR = 4  # hard
 
 
 class Puzzle(CreatedUpdatedModel):
