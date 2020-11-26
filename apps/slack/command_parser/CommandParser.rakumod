@@ -168,16 +168,8 @@ sub process-command(Str $s) is export {
     to-json($result);
 }
 
-# say %query;
-# say to-json %query;
-
 # my $cmd = @*ARGS;
 # say "cmd is $cmd";
-
 # my $m = Command.parse($cmd);
-# say $m<url>;
-
-# say '+++++++ RETURN +++++++';
 # my $result = process-command($m);
 # say $result;
-
