@@ -147,10 +147,10 @@ sub process-source-command ($m) {
     %query;
 }
 
-sub process-url-command (Match $m) {
+sub process-url-command (Match $url) {
     say 'process-url-command';
     my %query = (
-        url => $m.Str
+        url => $url.Str
     );
 
     %query;
