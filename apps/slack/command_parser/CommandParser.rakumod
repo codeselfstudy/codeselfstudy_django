@@ -73,6 +73,7 @@ class Command-actions {
 # 4      H    1-3  18-20
 # Converts a kyu level (1-8) to a codeselfstudy level (0-4)
 sub kyu-to-difficulty ($kyu) {
+    say $kyu;
     say "kyu is ", $kyu<num>.Int;
     given $kyu<num>.Int {
         when 8 { 1 }
@@ -112,7 +113,7 @@ sub difficulty-to-css-rating ($difficulty) {
 say '=======';
 
 # TODO change $m to $source
-sub get-source (Match $m) {
+sub get-source ($m) {
     given $m {
         when $m<source><leetcode> { 'leetcode' }
         when $m<source><codewars> { 'codewars' }
@@ -123,7 +124,7 @@ sub get-source (Match $m) {
 }
 
 # TODO change $m to $difficulty
-sub get-difficulty (Match $m) {
+sub get-difficulty ($m) {
     given $m {
         when $m<difficulty><kyu> { kyu-to-difficulty($m<difficulty><kyu>) }
         when $m<difficulty><word-rating> {word-rating-to-difficulty($m<difficulty><word-rating>) }
@@ -132,12 +133,17 @@ sub get-difficulty (Match $m) {
     }
 }
 
-sub process-source-command (Match $m) {
+sub process-source-command ($m) {
+    say '---';
+    say $m;
+    say '---';
     my %query = (
         source => get-source($m),
-        difficulty => get-difficulty($m)
+        # TODO: fix this
+        # difficulty => get-difficulty($m)
     );
 
+    # say %query;
     %query;
 }
 
@@ -153,23 +159,32 @@ sub process-url-command (Match $m) {
 sub dispatch-command (Str $s) {
     say 'dispatch-command';
     my $m = Command.parse($s);
+    say '---';
+    say $m.WHAT;
+    say $m;
+    say '---';
     given $m {
-        when $m<source-command> { process-source-command($m<source-command><source>) }
+        when $m<source-command> { process-source-command($m<source-command>) }
         when $m<url-command> { process-url-command($m<url-command><url>) }
     }
 }
+
+sub send-puzzle-json ($h) { to-json($h); }
+sub send-error-json () { to-json(msg => 'error', reason => 'could not parse command'); }
 
 # entrypoint
 sub process-command(Str $s) is export {
     say "process-command";
     my $result = dispatch-command($s);
-    say "result:";
-    say $result;
-    to-json($result);
+    if $result {
+        send-puzzle-json($result);
+    } else {
+        send-error-json();
+    }
 }
 
-# my $cmd = @*ARGS;
-# say "cmd is $cmd";
-# my $m = Command.parse($cmd);
-# my $result = process-command($m);
-# say $result;
+my $inp = @*ARGS;
+my $cmd = $inp.join(' ');
+say q{cmd is '$cmd'};
+my $result = process-command($cmd);
+say $result;
