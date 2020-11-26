@@ -6,10 +6,6 @@ use JSON::Tiny;
 use lib '.';
 use CommandParser;
 
-# ok True, 'true works';
-# nok False, 'not true';
-# is 'ab'.uc, 'AB', 'string comparison';
-
 # TODO:
 # test all the difficulties
 # test <url>
@@ -26,24 +22,20 @@ use CommandParser;
 
 # Test the url-style commands
 my $codewars = process-command('https://www.codewars.com/kata/5265b0885fda8eac5900093b');
-my $h = from-json($codewars);
-is $h<url>, 'https://www.codewars.com/kata/5265b0885fda8eac5900093b';
-is $h.keys, (url);
+my $h1 = from-json($codewars);
+is $h1.keys, ('url');
+is $h1<url>, 'https://www.codewars.com/kata/5265b0885fda8eac5900093b';
 
 my $leetcode = process-command('https://leetcode.com/problems/add-two-polynomials-represented-as-linked-lists/');
-my $h = from-json($leetcode);
-is $h<url>, 'https://leetcode.com/problems/add-two-polynomials-represented-as-linked-lists/';
+my $h2 = from-json($leetcode);
+is $h2<url>, 'https://leetcode.com/problems/add-two-polynomials-represented-as-linked-lists/';
 
 my $projecteuler = process-command('https://projecteuler.net/problem=1');
-my $h = from-json($projecteuler);
-is $h<url>, 'https://projecteuler.net/problem=1';
+my $h3 = from-json($projecteuler);
+is $h3<url>, 'https://projecteuler.net/problem=1';
 
 my $codeselfstudy = process-command('https://api.codeselfstudy.com/puzzles/12345');
-my $h = from-json($codeselfstudy);
-is $h<url>, 'https://api.codeselfstudy.com/puzzles/12345';
-
-# ok True, 'true works';
-# nok False, 'not true';
-# is 'ab'.uc, 'AB', 'string comparison';
+my $h4 = from-json($codeselfstudy);
+is $h4<url>, 'https://api.codeselfstudy.com/puzzles/12345';
 
 done-testing;
