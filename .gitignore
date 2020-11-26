@@ -6,6 +6,9 @@ logs/*
 !logs/.keep
 seed_data/
 
+# raku
+.precomp/
+
 # Environments
 .env
 .venv
