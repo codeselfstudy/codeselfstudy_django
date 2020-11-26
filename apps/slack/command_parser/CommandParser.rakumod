@@ -5,10 +5,12 @@ use JSON::Tiny;
 # Parses the slash-commands that come from Slack.
 grammar Command {
     # there are two types of commands
-    rule TOP { <source-command> | <url> }
+    rule TOP { <source-command> | <url-command> }
 
     # token source-command { [ <source> <language>*? <difficulty> <language>*? ] }
-    token source-command { <source> <difficulty> }
+    token source-command { <source> <difficulty> }  # TODO: add languages back
+    token url-command { <url> }
+
     token url { <protocol>'://'<address> }
 
     # number token
@@ -110,7 +112,7 @@ sub difficulty-to-css-rating ($difficulty) {
 say '=======';
 
 # TODO change $m to $source
-sub get-source ($m) {
+sub get-source (Match $m) {
     given $m {
         when $m<source><leetcode> { 'leetcode' }
         when $m<source><codewars> { 'codewars' }
@@ -121,7 +123,7 @@ sub get-source ($m) {
 }
 
 # TODO change $m to $difficulty
-sub get-difficulty ($m) {
+sub get-difficulty (Match $m) {
     given $m {
         when $m<difficulty><kyu> { kyu-to-difficulty($m<difficulty><kyu>) }
         when $m<difficulty><word-rating> {word-rating-to-difficulty($m<difficulty><word-rating>) }
@@ -130,7 +132,7 @@ sub get-difficulty ($m) {
     }
 }
 
-sub process-source-command ($m) {
+sub process-source-command (Match $m) {
     my %query = (
         source => get-source($m),
         difficulty => get-difficulty($m)
@@ -139,8 +141,8 @@ sub process-source-command ($m) {
     %query;
 }
 
-sub process-url-command ($m) {
-    say '-------';
+sub process-url-command (Match $m) {
+    say 'process-url-command';
     my %query = (
         url => $m.Str
     );
@@ -148,24 +150,34 @@ sub process-url-command ($m) {
     %query;
 }
 
-sub process-command ($m) {
+sub dispatch-command (Str $s) {
+    say 'dispatch-command';
+    my $m = Command.parse($s);
     given $m {
-        when $m<source-command> { process-source-command($m<source>) }
-        when $m<url> { process-url-command($m<url>) }
+        when $m<source-command> { process-source-command($m<source-command><source>) }
+        when $m<url-command> { process-url-command($m<url-command><url>) }
     }
+}
+
+# entrypoint
+sub process-command(Str $s) is export {
+    say "process-command";
+    my $result = dispatch-command($s);
+    say "result:";
+    say $result;
+    to-json($result);
 }
 
 # say %query;
 # say to-json %query;
 
-my $cmd = @*ARGS;
-say "cmd is $cmd";
+# my $cmd = @*ARGS;
+# say "cmd is $cmd";
 
-my $m = Command.parse($cmd);
-say $m<url>;
+# my $m = Command.parse($cmd);
+# say $m<url>;
 
-my $result = process-command($m);
-
-say '+++++++ RETURN +++++++';
-say to-json($result);
+# say '+++++++ RETURN +++++++';
+# my $result = process-command($m);
+# say $result;
 
