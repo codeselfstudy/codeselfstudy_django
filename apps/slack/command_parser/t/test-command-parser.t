@@ -24,11 +24,11 @@ use CommandParser;
 # say Command.parse('pe level3'); say "=======";
 # say Command.parse('project euler 1'); say "=======";
 
-
-
+# Test the url-style commands
 my $codewars = process-command('https://www.codewars.com/kata/5265b0885fda8eac5900093b');
 my $h = from-json($codewars);
 is $h<url>, 'https://www.codewars.com/kata/5265b0885fda8eac5900093b';
+is $h.keys, (url);
 
 my $leetcode = process-command('https://leetcode.com/problems/add-two-polynomials-represented-as-linked-lists/');
 my $h = from-json($leetcode);
