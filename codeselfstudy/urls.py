@@ -28,7 +28,8 @@ handler500 = "codeselfstudy.views.server_error"
 
 
 urlpatterns = [
-    path("puzzles/", include("puzzles.urls")),
+    # path("puzzles/", include("puzzles.urls")),
+    path("slack/", include("slack.urls")),
     path(f"{admin_url}/", admin.site.urls),
     path("", include("pages.urls")),
 ]

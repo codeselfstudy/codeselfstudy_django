@@ -1,6 +1,6 @@
-from django.urls import path
+# from django.urls import path
 
-from . import views
+# from . import views
 
 app_name = "puzzles"
 
@@ -8,8 +8,7 @@ app_name = "puzzles"
 # the behavior from the Flask app. These differ from the Flask URLs by being
 # prefixed with `api`. It's a temporary way to avoid using routes that might be
 # used for web ingerfaces later.
-urlpatterns = [
-    path("slack/", views.slack_slash_command, name="slack_slash_command"),
+# urlpatterns = [
     # path("api/<source>/", views.random_puzzle_by_source, name="random_puzzle_by_source"),
     # path("api/<source>/<puzzle_id>/", views.puzzle_by_id, name="puzzle_by_id"),
-]
+# ]
