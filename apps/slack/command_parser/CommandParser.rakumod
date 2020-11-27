@@ -110,8 +110,6 @@ sub difficulty-to-css-rating ($difficulty) {
 # }
 # say "difficulty level is $difficulty-level";
 
-say '=======';
-
 # TODO change $m to $source
 sub get-source ($m) {
     given $m {
@@ -133,12 +131,12 @@ sub get-difficulty ($m) {
     }
 }
 
-sub process-source-command ($m) {
+sub process-source-command (Match $source) {
     say '---';
-    say $m;
+    say $source;
     say '---';
     my %query = (
-        source => get-source($m),
+        source => get-source($source),
         # TODO: fix this
         # difficulty => get-difficulty($m)
     );
@@ -148,7 +146,10 @@ sub process-source-command ($m) {
 }
 
 sub process-url-command (Match $url) {
+    say '---';
     say 'process-url-command';
+    say '$url.WHAT: ', $url.WHAT;
+    say '$url: ', $url;
     my %query = (
         url => $url.Str
     );
@@ -157,24 +158,27 @@ sub process-url-command (Match $url) {
 }
 
 sub dispatch-command (Str $s) {
-    say 'dispatch-command';
+    say '---';
+    say 'λ dispatch-command';
+
     my $m = Command.parse($s);
-    say '---';
-    say $m.WHAT;
-    say $m;
-    say '---';
+    say '$m.WHAT: ', $m.WHAT;
+    say '$m<source-command>: ', $m<source-command>;
     given $m {
         when $m<source-command> { process-source-command($m<source-command>) }
         when $m<url-command> { process-url-command($m<url-command><url>) }
+        default { Nil }
     }
 }
 
 sub send-puzzle-json ($h) { to-json($h); }
-sub send-error-json () { to-json(msg => 'error', reason => 'could not parse command'); }
+sub send-error-json () { to-json({status => 'error', reason => 'could not parse command'}); }
 
 # entrypoint
 sub process-command(Str $s) is export {
-    say "process-command";
+    say '---';
+    say "λ process-command";
+
     my $result = dispatch-command($s);
     if $result {
         send-puzzle-json($result);
@@ -185,6 +189,6 @@ sub process-command(Str $s) is export {
 
 my $inp = @*ARGS;
 my $cmd = $inp.join(' ');
-say q{cmd is '$cmd'};
+say qq{cmd is '$cmd'};
 my $result = process-command($cmd);
 say $result;
