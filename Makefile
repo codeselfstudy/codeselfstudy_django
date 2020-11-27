@@ -19,7 +19,6 @@ clean:
 test:
 	pytest -n 2 -x --lf
 
-# TODO: install New Relic if we use this
 start:
 	make clean
 	NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program supervisord -c supervisord.conf
