@@ -21,6 +21,12 @@ from . import settings
 
 admin_url = os.environ.get("ADMIN_URL")
 
+handler404 = "codeselfstudy.views.not_found"
+handler500 = "codeselfstudy.views.server_error"
+# handler403 = "codeselfstudy.views.denied"
+# handler400 = "codeselfstudy.views.bad_request"
+
+
 urlpatterns = [
     path("puzzles/", include("puzzles.urls")),
     path(f"{admin_url}/", admin.site.urls),

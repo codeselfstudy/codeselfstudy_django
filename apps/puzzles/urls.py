@@ -10,4 +10,6 @@ app_name = "puzzles"
 # used for web ingerfaces later.
 urlpatterns = [
     path("slack/", views.slack_slash_command, name="slack_slash_command"),
+    # path("api/<source>/", views.random_puzzle_by_source, name="random_puzzle_by_source"),
+    # path("api/<source>/<puzzle_id>/", views.puzzle_by_id, name="puzzle_by_id"),
 ]
