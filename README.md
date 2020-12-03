@@ -2,6 +2,12 @@
 
 Puzzle server.
 
+Flask app endpoint:
+https://codeselfstudy.com/api/puzzles/slack
+
+Django app endpoint:
+https://s.codeselfstudy.com/slack/puzzles/
+
 # Development
 
 ## Installation
