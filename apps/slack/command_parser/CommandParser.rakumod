@@ -162,6 +162,9 @@ sub dispatch-command (Str $s) {
     say 'λ dispatch-command';
 
     my $m = Command.parse($s);
+    if !($m ~~ Command) {
+        return Nil;
+    }
     say '$m.WHAT: ', $m.WHAT;
     say '$m<source-command>: ', $m<source-command>;
     given $m {
