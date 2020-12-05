@@ -8,7 +8,7 @@ grammar Command {
     rule TOP { <source-command> | <url-command> }
 
     # token source-command { [ <source> <language>*? <difficulty> <language>*? ] }
-    token source-command { <source> <difficulty> }  # TODO: add languages back
+    rule source-command { <source> <difficulty> }  # TODO: add languages back
     token url-command { <url> }
 
     token url { <protocol>'://'<address> }
@@ -162,10 +162,14 @@ sub dispatch-command (Str $s) {
     say 'λ dispatch-command';
 
     my $m = Command.parse($s);
+    say '$m.WHAT: ', $m.WHAT;
+    # If the grammar doesn't match, it seems to return an (Any). So, if we
+    # don't get a (Command) back, it shouldn't return anything to the caller
+    # (until someone figures out a better way to do this).
     if !($m ~~ Command) {
+        say "\$m was not a Command";
         return Nil;
     }
-    say '$m.WHAT: ', $m.WHAT;
     say '$m<source-command>: ', $m<source-command>;
     given $m {
         when $m<source-command> { process-source-command($m<source-command>) }
