@@ -7,8 +7,9 @@ grammar Command {
     # there are two types of commands
     rule TOP { <source-command> | <url-command> }
 
-    # token source-command { [ <source> <language>*? <difficulty> <language>*? ] }
-    rule source-command { <source> <difficulty> }  # TODO: add languages back
+    # rule source-command { <source> <language>*? <difficulty> <language>*? }
+    rule source-command { <source> <difficulty> [ 'in' <languages> ]? }
+    # rule source-command { <source> <difficulty> }  # TODO: add languages back
     token url-command { <url> }
 
     token url { <protocol>'://'<address> }
@@ -37,10 +38,10 @@ grammar Command {
     token medium { 'medium' | 'intermediate' }
     token hard { 'hard' | 'advanced' | 'difficult' | 'impossible' | 'crazy' }
 
-    # TODO: language tokens
-    token language {
-        'raku'
-    }
+    # To avoid duplication, a language is any word not included in the above.
+    # The receiver of the JSON will decide whether that language exists or not.
+    token language { \w+ }
+    rule languages { <language>+ }
 
     # url tokens
     token protocol { 'http' | 'https' }
