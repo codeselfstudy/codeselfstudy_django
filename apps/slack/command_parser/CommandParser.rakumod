@@ -3,12 +3,12 @@ unit module CommandParser;
 use JSON::Tiny;
 
 # Parses the slash-commands that come from Slack.
-grammar Command {
+grammar Command is export {
     # there are two types of commands
     rule TOP { <source-command> | <url-command> }
 
     # rule source-command { <source> <language>*? <difficulty> <language>*? }
-    rule source-command { <source> <difficulty> [ 'in' <languages> ]? }
+    rule source-command { <source> <difficulty> <languages>? }
     # rule source-command { <source> <difficulty> }  # TODO: add languages back
     token url-command { <url> }
 
