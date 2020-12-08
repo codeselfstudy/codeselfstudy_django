@@ -8,7 +8,7 @@ grammar Command is export {
     rule TOP { <source-command> | <url-command> }
 
     # rule source-command { <source> <language>*? <difficulty> <language>*? }
-    rule source-command { <source> <difficulty> <languages>? }
+    rule source-command { <source> <languages>* <difficulty> <languages>? }
     # rule source-command { <source> <difficulty> }  # TODO: add languages back
     token url-command { <url> }
 
@@ -40,8 +40,8 @@ grammar Command is export {
 
     # To avoid duplication, a language is any word not included in the above.
     # The receiver of the JSON will decide whether that language exists or not.
-    token language { \w+ }
-    rule languages { <language>+ }
+    token language { <!difficulty> \w+ }
+    rule languages { <language> + }
 
     # url tokens
     token protocol { 'http' | 'https' }

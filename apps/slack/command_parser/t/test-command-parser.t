@@ -20,6 +20,13 @@ use CommandParser;
 # say Command.parse('pe level3'); say "=======";
 # say Command.parse('project euler 1'); say "=======";
 
+# Test the grammar.
+ok Command.parse('js', :rule<language>), '<language> parses: js';
+ok Command.parse('js python cobol', :rule<languages>), '<languages> parses: js python cobol';
+
+say 'HERE';
+
+
 # Test the url-style commands
 my $codewars = process-command('https://www.codewars.com/kata/5265b0885fda8eac5900093b');
 my $h1 = from-json($codewars);
