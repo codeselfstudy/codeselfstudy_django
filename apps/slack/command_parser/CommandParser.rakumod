@@ -7,9 +7,8 @@ grammar Command is export {
     # there are two types of commands
     rule TOP { <source-command> | <url-command> }
 
-    # rule source-command { <source> <language>*? <difficulty> <language>*? }
+    # `languages` is not greedy, because a language cannot be a `difficulty`.
     rule source-command { <source> <languages>* <difficulty> <languages>? }
-    # rule source-command { <source> <difficulty> }  # TODO: add languages back
     token url-command { <url> }
 
     token url { <protocol>'://'<address> }
@@ -100,14 +99,6 @@ sub difficulty-to-css-rating ($difficulty) {
     }
 }
 
-# my $difficulty-level = 0;
-# given $m {
-#     when $m<difficulty><level> { $difficulty-level = $m<difficulty><level><num> }
-#     when $m<difficulty><kyu> { $difficulty-level = $m<difficulty><kyu><num> }
-# }
-# say "difficulty level is $difficulty-level";
-
-# TODO change $m to $source
 sub get-source ($m) {
     given $m {
         when $m<source><leetcode> { 'leetcode' }
@@ -118,7 +109,6 @@ sub get-source ($m) {
     }
 }
 
-# TODO change $m to $difficulty
 sub get-difficulty ($m) {
     given $m {
         when $m<difficulty><kyu> { kyu-to-difficulty($m<difficulty><kyu>) }
