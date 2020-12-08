@@ -151,8 +151,19 @@ sub process-url-command (Match $url) {
     say 'process-url-command';
     say '$url.WHAT: ', $url.WHAT;
     say '$url: ', $url;
+
+    # TODO: this should use the URL parsing rules from the Command grammar, if
+    # that's possible. In the meantime, this at least ensures that the URL
+    # doesn't have multiple args.
+    my $split-url = $url.split(/\s+/);
+    my $cleaned-url;
+    if $split-url.elems() > 1 {
+        $cleaned-url = $split-url[0];
+    } else {
+        $cleaned-url = $url;
+    }
     my %query = (
-        url => $url.Str
+        url => $cleaned-url.Str
     );
 
     %query;
@@ -195,6 +206,8 @@ sub process-command(Str $s) is export {
     }
 }
 
+# I tried a MAIN sub here, but that didn't produce output. Maybe the module
+# needs to be loaded in a script?
 my $inp = @*ARGS;
 my $cmd = $inp.join(' ');
 say qq{cmd is '$cmd'};
