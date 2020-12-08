@@ -30,6 +30,7 @@ def puzzle_slash_command(request):
     slack_payload = extract_slack_payload(data)
     command: Dict = slack_payload.get("command")
 
+    # TODO: parse command here
     puzzle = query_to_puzzle(command)
 
 

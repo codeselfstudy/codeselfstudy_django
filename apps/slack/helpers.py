@@ -1,5 +1,6 @@
 import os
 import json
+import pathlib
 import subprocess
 from typing import Dict
 from urllib.parse import parse_qs
@@ -61,8 +62,11 @@ def parse_command(command: str) -> Dict:
 
     This uses the Raku parser.
     """
-    result = subprocess.run(["raku", "command_parser/CommandParser.rakumod", command], capture_output=True)
+    current_dir = pathlib.Path().absolute()
 
+    # The path needs modification here because it was overridden in order to
+    # put the Django apps in their own directory.
+    result = subprocess.run(["raku", f"{current_dir}/apps/slack/command_parser/CommandParser.rakumod", command], capture_output=True)
     j = result.stdout.decode("utf-8")
     d = json.loads(j)
     return d
