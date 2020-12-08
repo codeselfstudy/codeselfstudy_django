@@ -78,6 +78,12 @@ class Puzzle(CreatedUpdatedModel):
         help_text="Any Python data type here will be turned into JSONB.",
     )
 
+    # This prevents the same puzzle from being posted twice.
+    was_seen = models.BooleanField(
+        default=False,
+        help_text="Has the puzzle been posted to Slack before?"
+    )
+
     # Warning: tags won't be saved when doing `commit=False` unless you do
     # `.save_m2m()`. See the following link.
     # https://django-taggit.readthedocs.io/en/latest/forms.html
