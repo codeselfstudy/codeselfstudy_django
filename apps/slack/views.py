@@ -1,14 +1,13 @@
 import logging
-from random import choice
+# from random import choice
 from textwrap import dedent
-from typing import Dict
 
 from django.http import JsonResponse, Http404, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .signature import verify_signature
-from .helpers import is_valid_slack_app, extract_slack_payload
-from puzzles.models import Puzzle
+from .helpers import is_valid_slack_app, extract_slack_payload, parse_command
+# from puzzles.models import Puzzle
 from puzzles.puzzles import query_to_puzzle
 
 log = logging.getLogger(__name__)
@@ -28,18 +27,10 @@ def puzzle_slash_command(request):
         return HttpResponse('Unauthorized', status=401)
 
     slack_payload = extract_slack_payload(data)
-    command: Dict = slack_payload.get("command")
+    command = slack_payload.get("command")
 
-    # TODO: parse command here
-    puzzle = query_to_puzzle(command)
-
-
-
-    # get a random puzzle, medium difficulty
-    pks = Puzzle.objects.values_list("pk", flat=True)
-    random_pk = choice(pks)
-    # p = Puzzle.objects.order_by("?").get(difficulty=3)[0]
-    p = Puzzle.objects.get(pk=random_pk)
+    q = parse_command(command)
+    p = query_to_puzzle(q)
 
     # TODO: fix this quick, tmp hack
     difficulty_names = {
