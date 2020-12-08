@@ -138,11 +138,10 @@ sub process-source-command (Match $source) {
     say '---';
     my %query = (
         source => get-source($source),
-        # TODO: fix this
-        # difficulty => get-difficulty($m)
+        difficulty => get-difficulty($source).Int
     );
 
-    # say %query;
+    say %query;
     %query;
 }
 
