@@ -24,8 +24,6 @@ use CommandParser;
 ok Command.parse('js', :rule<language>), '<language> parses: js';
 ok Command.parse('js python cobol', :rule<languages>), '<languages> parses: js python cobol';
 
-say 'HERE';
-
 
 # Test the url-style commands
 my $codewars = process-command('https://www.codewars.com/kata/5265b0885fda8eac5900093b');
