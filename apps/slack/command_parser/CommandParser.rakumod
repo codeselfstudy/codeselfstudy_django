@@ -56,7 +56,6 @@ grammar Command is export {
 class Command-actions {
     # Converts a kyu level (1-8) to a codeselfstudy level (0-4)
     method kyu-to-difficulty ($kyu) {
-        say "kyu is ", $kyu.WHAT;
         given $kyu {
             when 8 { 1 }
             when 6..7 { 2 }
@@ -74,8 +73,6 @@ class Command-actions {
 # 4      H    1-3  18-20
 # Converts a kyu level (1-8) to a codeselfstudy level (0-4)
 sub kyu-to-difficulty ($kyu) {
-    say $kyu;
-    say "kyu is ", $kyu<num>.Int;
     given $kyu<num>.Int {
         when 8 { 1 }
         when 6..7 { 2 }
@@ -86,7 +83,6 @@ sub kyu-to-difficulty ($kyu) {
 }
 
 sub word-rating-to-difficulty ($word-rating) {
-    say "HERE: ", $word-rating;
     given $word-rating {
         when $word-rating<novice> { 1 }
         when $word-rating<easy> { 2 }
@@ -138,25 +134,16 @@ sub get-languages ($m) {
 }
 
 sub process-source-command (Match $source) {
-    say '---';
-    say $source;
-    say '---';
     my %query = (
         source => get-source($source),
         difficulty => get-difficulty($source).Int,
         languages => get-languages($source)
     );
 
-    say %query;
     %query;
 }
 
 sub process-url-command (Match $url) {
-    say '---';
-    say 'process-url-command';
-    say '$url.WHAT: ', $url.WHAT;
-    say '$url: ', $url;
-
     # TODO: this should use the URL parsing rules from the Command grammar, if
     # that's possible. In the meantime, this at least ensures that the URL
     # doesn't have multiple args.
@@ -175,19 +162,13 @@ sub process-url-command (Match $url) {
 }
 
 sub dispatch-command (Str $s) {
-    say '---';
-    say 'λ dispatch-command';
-
     my $m = Command.parse($s);
-    say '$m.WHAT: ', $m.WHAT;
     # If the grammar doesn't match, it seems to return an (Any). So, if we
     # don't get a (Command) back, it shouldn't return anything to the caller
     # (until someone figures out a better way to do this).
     if !($m ~~ Command) {
-        say "\$m was not a Command";
         return Nil;
     }
-    say '$m<source-command>: ', $m<source-command>;
     given $m {
         when $m<source-command> { process-source-command($m<source-command>) }
         when $m<url-command> { process-url-command($m<url-command><url>) }
@@ -200,9 +181,6 @@ sub send-error-json () { to-json({status => 'error', reason => 'could not parse 
 
 # entrypoint
 sub process-command(Str $s) is export {
-    say '---';
-    say "λ process-command";
-
     my $result = dispatch-command($s);
     if $result {
         send-puzzle-json($result);
@@ -215,6 +193,5 @@ sub process-command(Str $s) is export {
 # needs to be loaded in a script?
 my $inp = @*ARGS;
 my $cmd = $inp.join(' ');
-say qq{cmd is '$cmd'};
 my $result = process-command($cmd);
 say $result;
