@@ -11,7 +11,7 @@ class PuzzleSources(models.TextChoices):
     """
     CODEWARS = "Codewars", "Codewars"
     LEETCODE = "Leetcode", "Leetcode"
-    PROJECT_EULER = "Project Euler", "Project Euler"
+    PROJECTEULER = "Project Euler", "Project Euler"
     CODESELFSTUDY = "Code Self Study", "Code Self Study"
     UNKNOWN = "Unknown", "Unknown"
 
