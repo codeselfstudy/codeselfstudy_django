@@ -17,7 +17,10 @@ clean:
 # --ff means run the fail tests first
 # pytest -n 3 --cov-config=.coveragerc -x --lf
 test:
+	# Python tests
 	pytest -n 2 -x --lf
+	# Raku tests
+	raku apps/slack/command_parser/t/test-command-parser.t
 
 start:
 	make clean
