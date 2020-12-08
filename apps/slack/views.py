@@ -1,13 +1,15 @@
 import logging
 from random import choice
 from textwrap import dedent
+from typing import Dict
 
 from django.http import JsonResponse, Http404, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .signature import verify_signature
-from .helpers import is_valid_slack_app
+from .helpers import is_valid_slack_app, extract_slack_payload
 from puzzles.models import Puzzle
+from puzzles.puzzles import query_to_puzzle
 
 log = logging.getLogger(__name__)
 
@@ -24,6 +26,13 @@ def puzzle_slash_command(request):
 
     if not verify_signature(slack_signature, slack_ts, data) or not is_valid_slack_app(data):
         return HttpResponse('Unauthorized', status=401)
+
+    slack_payload = extract_slack_payload(data)
+    command: Dict = slack_payload.get("command")
+
+    puzzle = query_to_puzzle(command)
+
+
 
     # get a random puzzle, medium difficulty
     pks = Puzzle.objects.values_list("pk", flat=True)

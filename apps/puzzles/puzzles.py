@@ -6,6 +6,8 @@ this file will return a puzzle to the caller.
 """
 from typing import Dict
 
+from .models import Puzzle
+
 
 def query_to_puzzle(q: Dict):
     """
@@ -24,3 +26,22 @@ def query_to_puzzle(q: Dict):
     {'url': 'https://leetcode.com/problems/add-two-polynomials-represented-as-linked-lists/'}
     ```
     """
+
+    # TODO: query a puzzle here based on the command
+
+    if q.get("url") is not None:
+        # it's a url command
+        return _url_command_to_puzzle_response(q)
+    else:
+        # it's a source command
+        return _source_command_to_puzzle_response(q)
+
+
+def _url_command_to_puzzle_response(q: Dict):
+    # TODO: check that it's a valid puzzle URL, then return it
+    pass
+
+
+def _source_command_to_puzzle_response(q: Dict):
+    # TODO: get a puzzle from the database
+    pass
