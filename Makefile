@@ -20,7 +20,7 @@ test:
 	# Python tests
 	pytest -n 2 -x --lf
 	# Raku tests
-	raku apps/slack/command_parser/t/test-command-parser.t
+	cd apps/slack/command_parser/ && raku t/test-command-parser.t
 
 start:
 	make clean
