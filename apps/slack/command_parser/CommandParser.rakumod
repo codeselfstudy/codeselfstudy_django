@@ -132,13 +132,19 @@ sub get-difficulty ($m) {
     }
 }
 
+sub get-languages ($m) {
+    # There is probably a better way to do this.
+    $m<languages>.Str.split(' ').Array.grep(none '');
+}
+
 sub process-source-command (Match $source) {
     say '---';
     say $source;
     say '---';
     my %query = (
         source => get-source($source),
-        difficulty => get-difficulty($source).Int
+        difficulty => get-difficulty($source).Int,
+        languages => get-languages($source)
     );
 
     say %query;
