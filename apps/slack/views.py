@@ -6,6 +6,7 @@ from django.http import JsonResponse, Http404, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .signature import verify_signature
+from .helpers import is_valid_slack_app
 from puzzles.models import Puzzle
 
 log = logging.getLogger(__name__)
@@ -21,7 +22,7 @@ def puzzle_slash_command(request):
 
     data = request.body.decode("utf-8")
 
-    if not verify_signature(slack_signature, slack_ts, data):
+    if not verify_signature(slack_signature, slack_ts, data) or not is_valid_slack_app(data):
         return HttpResponse('Unauthorized', status=401)
 
     # get a random puzzle, medium difficulty
