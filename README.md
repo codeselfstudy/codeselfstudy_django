@@ -2,6 +2,12 @@
 
 Puzzle server.
 
+Flask app endpoint:
+https://codeselfstudy.com/api/puzzles/slack
+
+Django app endpoint:
+https://s.codeselfstudy.com/slack/puzzles/
+
 # Development
 
 ## Installation
@@ -66,6 +72,28 @@ After Postgres is running, create a database using the name you chose in your `.
 
 ```text
 $ python manage.py migrate
+```
+
+### Raku
+
+[`TODO:` make sure this section of the setup instructions works. This first draft is written from memory.]
+
+The slash-command parser is written in a language called [Raku](https://raku.guide/#_introduction). You can install Raku with [rakubrew](https://rakubrew.org/):
+
+```
+$ rakubrew download
+```
+
+You'll also need the `zef` package manager:
+
+```
+$ rakubrew build-zef
+```
+
+After they are both installed, run this to install this site's only Raku dependecy:
+
+```
+$ zef install JSON::Tiny
 ```
 
 ## Testing

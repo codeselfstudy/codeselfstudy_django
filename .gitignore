@@ -1,10 +1,17 @@
+deploy.sh
+newrelic.ini
+
 # tmp files
 TMP/
 NOTES_TMP.md
+TMP_NOTES/
 *_PENDING_DELETION
 logs/*
 !logs/.keep
 seed_data/
+
+# Raku
+.precomp/
 
 # Environments
 .env

@@ -11,7 +11,7 @@ class PuzzleSources(models.TextChoices):
     """
     CODEWARS = "Codewars", "Codewars"
     LEETCODE = "Leetcode", "Leetcode"
-    PROJECT_EULER = "Project Euler", "Project Euler"
+    PROJECTEULER = "Project Euler", "Project Euler"
     CODESELFSTUDY = "Code Self Study", "Code Self Study"
     UNKNOWN = "Unknown", "Unknown"
 
@@ -78,6 +78,12 @@ class Puzzle(CreatedUpdatedModel):
         help_text="Any Python data type here will be turned into JSONB.",
     )
 
+    # This prevents the same puzzle from being posted twice.
+    was_seen = models.BooleanField(
+        default=False,
+        help_text="Has the puzzle been posted to Slack before?"
+    )
+
     # Warning: tags won't be saved when doing `commit=False` unless you do
     # `.save_m2m()`. See the following link.
     # https://django-taggit.readthedocs.io/en/latest/forms.html
@@ -94,7 +100,7 @@ class Puzzle(CreatedUpdatedModel):
 
         (The slug is handled above.)
         """
-        if self.source == PuzzleSources.PROJECT_EULER:
+        if self.source == PuzzleSources.PROJECTEULER:
             description = fix_project_euler_relative_paths(self.unsafe_description)
         else:
             description = self.unsafe_description

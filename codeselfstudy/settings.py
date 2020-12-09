@@ -54,6 +54,7 @@ ALLOWED_HOSTS: List[str] = [
     "127.0.0.1",
     "localhost",
     "codeselfstudy.com",
+    "s.codeselfstudy.com",
 ]
 
 INSTALLED_APPS = [

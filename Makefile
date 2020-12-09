@@ -17,9 +17,11 @@ clean:
 # --ff means run the fail tests first
 # pytest -n 3 --cov-config=.coveragerc -x --lf
 test:
+	# Python tests
 	pytest -n 2 -x --lf
+	# Raku tests
+	cd apps/slack/command_parser/ && raku t/test-command-parser.t
 
-# TODO: install New Relic if we use this
 start:
 	make clean
 	NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program supervisord -c supervisord.conf

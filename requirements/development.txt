@@ -30,6 +30,7 @@ html2text==2020.1.16
 # https://django-bleach.readthedocs.io/en/latest/settings.html#settings
 django-bleach==0.6.1
 beautifulsoup4==4.9.3
+slack-sdk==3.0.0
 
 # code
 flake8==3.8.4

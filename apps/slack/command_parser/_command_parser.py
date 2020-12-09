@@ -5,7 +5,7 @@ TODO: it was copied from the old Flask app and needs to be fixed for Django.
 """
 import re
 from os import environ
-from app.helpers.utilities import safe_list_get
+from codeselfstudy.helpers.utils import safe_list_get
 from urllib.parse import parse_qs
 
 from .languages import codewars_valid_languages
