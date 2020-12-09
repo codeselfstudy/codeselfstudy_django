@@ -18,6 +18,7 @@ import os
 from django.contrib import admin
 from django.urls import path, include
 from . import settings
+from .views import robots_txt
 
 admin_url = os.environ.get("ADMIN_URL")
 
@@ -28,6 +29,7 @@ handler500 = "codeselfstudy.views.server_error"
 
 
 urlpatterns = [
+    path("robots.txt", robots_txt),
     # path("puzzles/", include("puzzles.urls")),
     path("slack/", include("slack.urls")),
     path(f"{admin_url}/", admin.site.urls),
