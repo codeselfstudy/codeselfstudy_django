@@ -9,6 +9,7 @@ from .signature import verify_signature
 from .helpers import is_valid_slack_app, extract_slack_payload, parse_command
 # from puzzles.models import Puzzle
 from puzzles.puzzles import query_to_puzzle
+from codeselfstudy.settings import DEBUG
 
 log = logging.getLogger(__name__)
 
@@ -23,14 +24,19 @@ def puzzle_slash_command(request):
 
     data = request.body.decode("utf-8")
 
-    if not verify_signature(slack_signature, slack_ts, data) or not is_valid_slack_app(data):
+    # only check for Slack signatures in production
+    if DEBUG is False and (not verify_signature(slack_signature, slack_ts, data) or not is_valid_slack_app(data)):
         return HttpResponse('Unauthorized', status=401)
 
     slack_payload = extract_slack_payload(data)
-    command = slack_payload.get("command")
+    command = slack_payload.get("text")
 
     q = parse_command(command)
     p = query_to_puzzle(q)
+
+    # Mark the puzzle as seen so that it doesn't show up again.
+    p.was_seen = True
+    p.save()
 
     # TODO: fix this quick, tmp hack
     difficulty_names = {

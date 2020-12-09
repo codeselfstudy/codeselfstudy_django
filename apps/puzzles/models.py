@@ -100,7 +100,7 @@ class Puzzle(CreatedUpdatedModel):
 
         (The slug is handled above.)
         """
-        if self.source == PuzzleSources.PROJECT_EULER:
+        if self.source == PuzzleSources.PROJECTEULER:
             description = fix_project_euler_relative_paths(self.unsafe_description)
         else:
             description = self.unsafe_description

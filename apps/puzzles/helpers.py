@@ -18,7 +18,7 @@ def source_string_to_puzzle_source(source_string):
         source = PuzzleSources.CODESELFSTUDY
     else:
         # put some default here
-        source = PuzzleSources.CODWARS
+        source = PuzzleSources.CODEWARS
 
     return source
 
