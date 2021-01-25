@@ -17,6 +17,7 @@ log = logging.getLogger(__name__)
 @csrf_exempt
 def puzzle_slash_command(request):
     if request.method != "POST":
+        log.error(f"request to puzzle_slash_command was not a POST. Headers: {request.headers}")
         raise Http404("Not found")
 
     slack_signature = request.headers.get("X-Slack-Signature")
@@ -26,10 +27,12 @@ def puzzle_slash_command(request):
 
     # only check for Slack signatures in production
     if DEBUG is False and (not verify_signature(slack_signature, slack_ts, data) or not is_valid_slack_app(data)):
+        log.error(f"request was POST but not valid: {request.headers} /// {request.body}")
         return HttpResponse('Unauthorized', status=401)
 
     slack_payload = extract_slack_payload(data)
     command = slack_payload.get("text")
+    log.info(f"slack_payload: {slack_payload}")
 
     q = parse_command(command)
     p = query_to_puzzle(q)
@@ -37,6 +40,7 @@ def puzzle_slash_command(request):
     # Mark the puzzle as seen so that it doesn't show up again.
     p.was_seen = True
     p.save()
+    log.info(f"the saved puzzle is: {p.__dict__}")
 
     # TODO: fix this quick, tmp hack
     difficulty_names = {
