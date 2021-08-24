@@ -1,0 +1,31 @@
+build/
+.cache/
+.pytest_cache/
+docker/
+.git/
+node_modules/
+*.sqlite3
+
+logs/*
+!logs/.keep
+
+*.bak
+*.orig
+*PENDING_DELETION*
+
+# Editors
+*~
+tags
+tags.*
+.idea/
+.vscode/
+.vim/
+*.sw[op]
+
+# Python
+*.py[cod]
+__pycache__/
+.venv/
+
+# Ruby
+/.bundle

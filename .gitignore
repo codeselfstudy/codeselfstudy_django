@@ -1,5 +1,6 @@
 deploy.sh
 newrelic.ini
+pg/
 
 # tmp files
 TMP/

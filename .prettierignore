@@ -4,3 +4,10 @@ tags
 tags.*
 dist/
 build/
+TMP_NOTES/
+.vim/
+.vscode/
+.pytest_cache/
+logs/
+__pycache__/
+pg/
