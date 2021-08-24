@@ -31,6 +31,7 @@ services:
       - .:/app
       - static_volume:/app/build
     ports:
+      # I'm not sure why this is 8000 (5000 doesn't work, even though it should be running on 5000)
       - "8000:8000"
     depends_on:
       - postgres
