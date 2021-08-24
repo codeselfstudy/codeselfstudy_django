@@ -16,7 +16,7 @@ services:
     build:
       dockerfile: postgres.Dockerfile
       context: ./docker
-    env_file: .env/postgres
+    env_file: .env
     volumes:
       - postgres:/var/lib/postgresql/data
 
@@ -25,7 +25,8 @@ services:
       dockerfile: docker/django.dev.Dockerfile
       context: .
     restart: always
-    command: gunicorn platinum.wsgi:application --bind 0.0.0.0:5000
+    # command: gunicorn codeselfstudy.wsgi:application --bind 0.0.0.0:5000
+    command: python manage.py runserver 0.0.0.0:5000
     volumes:
       - .:/app
       - static_volume:/app/build
@@ -34,7 +35,7 @@ services:
     depends_on:
       - postgres
       - redis
-    env_file: .env/django
+    env_file: .env
 
   redis:
     image: redis:6-alpine

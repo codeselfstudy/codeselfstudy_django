@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 
 # delete the existing build files

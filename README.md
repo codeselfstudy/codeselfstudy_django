@@ -4,6 +4,8 @@ Puzzle server.
 
 # Development
 
+TODO: update this for Docker. (basically: `docker-compose -f docker-compose.dev.yml up --build`) It will be running on `localhost:5000` unless this README is out of date.
+
 ## Installation
 
 ### Python

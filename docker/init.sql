@@ -1,1 +1,1 @@
-CREATE DATABASE codeselfstudy;
+-- CREATE DATABASE codeselfstudy;

@@ -1,7 +1,6 @@
 build/
 .cache/
 .pytest_cache/
-docker/
 .git/
 node_modules/
 *.sqlite3
