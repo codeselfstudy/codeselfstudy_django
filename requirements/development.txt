@@ -38,3 +38,5 @@ mypy==0.790
 
 # monitoring
 # sentry-sdk==0.19.3
+
+gunicorn==20.1.0
