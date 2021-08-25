@@ -6,6 +6,27 @@ Puzzle server.
 
 TODO: update this for Docker. (basically: `docker-compose -f docker-compose.dev.yml up --build`) It will be running on `localhost:5000` unless this README is out of date.
 
+Example commands:
+
+```bash
+# start up the docker containers
+docker-compose -f docker-compose.dev.yml up --build
+
+# one-time setup
+docker-compose -f docker-compose.dev.yml exec django python manage.py makemigrations
+docker-compose -f docker-compose.dev.yml exec django python manage.py migrate
+docker-compose -f docker-compose.dev.yml exec django python manage.py createsuperuser
+
+# load seed data
+docker-compose -f docker-compose.dev.yml exec django python manage.py loaddata apps/puzzles/fixtures/codewars.fixtures.json
+docker-compose -f docker-compose.dev.yml exec django python manage.py loaddata apps/puzzles/fixtures/leetcode.fixtures.json
+docker-compose -f docker-compose.dev.yml exec django python manage.py loaddata apps/puzzles/fixtures/projecteuler.fixtures.json
+docker-compose -f docker-compose.dev.yml exec django python manage.py loaddata apps/languages/fixtures/languages.yaml
+
+# shut down docker containers
+docker-compose -f docker-compose.dev.yml down
+```
+
 ## Installation
 
 ### Python
