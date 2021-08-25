@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "pages.apps.PagesConfig",
     "languages.apps.LanguagesConfig",
     "puzzles.apps.PuzzlesConfig",
+    "quizzes.apps.QuizzesConfig",
     # "discourse.apps.DiscourseConfig",
     # "slack.apps.SlackConfig",
 

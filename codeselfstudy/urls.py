@@ -32,6 +32,7 @@ urlpatterns = [
     path("robots.txt", robots_txt),
     # path("puzzles/", include("puzzles.urls")),
     path("slack/", include("slack.urls")),
+    path("quizzes/", include("quizzes.urls")),
     path(f"{admin_url}/", admin.site.urls),
     path("", include("pages.urls")),
 ]
