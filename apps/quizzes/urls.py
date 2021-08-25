@@ -5,5 +5,6 @@ from . import views
 app_name = "quizzes"
 
 urlpatterns = [
-    path("<int:quiz_id>", views.quiz, name="quiz"),
+    path("<int:quiz_id>/", views.quiz, name="quiz"),
+    path("", views.list, name="list"),
 ]
