@@ -29,25 +29,9 @@ docker-compose -f docker-compose.dev.yml down
 
 ## Installation
 
-### Python
+TODO: write new instructions for the docker-compose workflow.
 
-Create a Python virtual environment:
-
-```text
-$ python3 -m venv .venv
-```
-
-Activate the virtual environment:
-
-```text
-$ source .venv/bin/activate
-```
-
-Install the dependencies into the virtual environment:
-
-```text
-$ pip install -r requirements/development.txt
-```
+TODO: add instructions about the `.env` files.
 
 Generate a secret key, and copy the example environment file for editing:
 
@@ -57,39 +41,6 @@ $ cp .env-example .env
 ```
 
 Open the .env file and add the secret key to the `DJANGO_SECRET_KEY` line, and fill in the `DATABASE_NAME` you want to use, and any database credentials needed.
-
-When you are finished working on the site, you can deactivate the virtual environment with:
-
-```text
-$ deactivate
-```
-
-For convenience, you can add this to your `.zshenv`, `.bashrc`, or `.aliases` file:
-
-```bash
-alias m='python manage.py'
-```
-
-If you do that, wherever you see `python manage.py` in this document, you can type `m` instead.
-
-### Node.js
-
-Make sure you're using Node 12, and then install the dependencies. The `nvm use` command will automatically switch to Node 12 by reading the `.nvmrc` file, if you installed Node with `nvm`.
-
-```text
-$ nvm use
-$ npm install
-```
-
-### Database
-
-If you don't have Postgres installed on your computer, you can run it from within a Docker container. See the [README.md](./server_development/docker/README.md) file in the `./server_development/docker/` directory.
-
-After Postgres is running, create a database using the name you chose in your `.env` file, then migrate the database:
-
-```text
-$ python manage.py migrate
-```
 
 ### Raku
 
