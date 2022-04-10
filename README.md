@@ -2,6 +2,8 @@
 
 Puzzle server.
 
+**Note:** everything below might be out of date, because some things are being cleaned up.
+
 # Development
 
 ## Installation
