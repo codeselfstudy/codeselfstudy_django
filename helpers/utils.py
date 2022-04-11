@@ -1,4 +1,9 @@
-"""Utility functions."""
+"""
+Utility functions.
+
+
+TODO: Make sure these functions are relevant to the Django 4 site. I copied this file in from an older version.
+"""
 import re
 import secrets
 from uuid import uuid4
