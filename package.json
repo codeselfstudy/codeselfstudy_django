@@ -6,21 +6,25 @@
     "scripts": {
         "start": "./scripts/npm_start.sh",
         "build": "./scripts/npm_build.sh",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "browserlist:update-db": "npx browserslist@latest --update-db",
+        "test": "playwright test",
+        "format": "black . && prettier --write \"**/*.{md,mdx,ts,js,jsx,tsx,yaml,yml,json}\""
     },
     "author": "Code Self Study (https://github.com/codeselfstudy)",
     "license": "BSD-3-Clause",
     "private": true,
+    "browserslist": "defaults",
     "devDependencies": {
-        "autoprefixer": "^10.0.2",
-        "cypress": "^5.6.0",
-        "parcel-bundler": "^1.12.4",
-        "sass": "^1.30.0",
-        "typescript": "^4.1.2"
+        "@parcel/transformer-sass": "2.4.1",
+        "@playwright/test": "^1.20.2",
+        "parcel": "^2.4.1",
+        "parcel-reporter-static-files-copy": "^1.3.4",
+        "prettier": "^2.6.2",
+        "sass": "^1.50.0",
+        "typescript": "^4.6.3"
     },
     "dependencies": {
-        "bulma": "^0.9.1",
-        "bulma-extensions": "^6.2.7",
-        "lodash": "^4.17.20"
+        "lodash": "^4.17.21",
+        "simpledotcss": "^2.0.6"
     }
 }

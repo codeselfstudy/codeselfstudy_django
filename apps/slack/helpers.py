@@ -6,7 +6,7 @@ import subprocess
 from typing import Dict
 from urllib.parse import parse_qs
 
-from codeselfstudy.helpers.utils import safe_list_get
+from helpers.utils import safe_list_get
 
 log = logging.getLogger(__name__)
 
@@ -69,7 +69,14 @@ def parse_command(command: str) -> Dict:
 
     # The path needs modification here because it was overridden in order to
     # put the Django apps in their own directory.
-    result = subprocess.run(["raku", f"{current_dir}/apps/slack/command_parser/CommandParser.rakumod", command], capture_output=True)
+    result = subprocess.run(
+        [
+            "raku",
+            f"{current_dir}/apps/slack/command_parser/CommandParser.rakumod",
+            command,
+        ],
+        capture_output=True,
+    )
     log.info(f"result from raku is: {result}")
     j = result.stdout.decode("utf-8")
     d = json.loads(j)

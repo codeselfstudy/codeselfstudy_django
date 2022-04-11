@@ -67,15 +67,13 @@ def render_yaml(pk, language_name):
   fields:
       name: {language_name}
       description:
-      created_at: 2020-11-21T23:50:58.096Z
-      updated_at: 2020-11-21T23:50:58.096Z
     """.strip()
 
 
 if __name__ == "__main__":
     output = []
     for idx, lang in enumerate(languages):
-        output.append(render_yaml(idx+1, lang))
+        output.append(render_yaml(idx + 1, lang))
 
     with open("languages.yaml", "w") as f:
         f.write("\n".join(output))

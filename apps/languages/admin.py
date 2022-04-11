@@ -1,3 +1,10 @@
+# TODO: This old code doesn't work, so it needs to be updated.
+
+# SystemCheckError: System check identified some issues:
+# ERRORS:
+# <class 'languages.admin.LanguageAdmin'>: (admin.E035) The value of 'readonly_fields[0]' is not a callable, an attribute of 'LanguageAdmin', or an attribute of 'languages.Language'.
+# <class 'languages.admin.LanguageAdmin'>: (admin.E035) The value of 'readonly_fields[1]' is not a callable, an attribute of 'LanguageAdmin', or an attribute of 'languages.Language'.
+
 from django.contrib import admin
 
 from .models import Language, LanguageVariantName
@@ -9,10 +16,9 @@ class LanguageVariantNameInline(admin.StackedInline):
 
 
 class LanguageAdmin(admin.ModelAdmin):
-    readonly_fields = ("created_at", "updated_at")
     fieldsets = [
         (None, {"fields": ["name", "description"]}),
-        ("Meta Data", {"fields": ["created_at", "updated_at"]}),
+        ("Meta Data", {"fields": ["created", "updated"]}),
     ]
     inlines = [LanguageVariantNameInline]
     list_display = ("name", "variant_names")

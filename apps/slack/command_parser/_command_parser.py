@@ -5,7 +5,7 @@ TODO: it was copied from the old Flask app and needs to be fixed for Django.
 """
 import re
 from os import environ
-from codeselfstudy.helpers.utils import safe_list_get
+from helpers.utils import safe_list_get
 from urllib.parse import parse_qs
 
 from .languages import codewars_valid_languages
@@ -97,10 +97,7 @@ def _generate_codewars_query(words):
     """Generates a mongo query based on the text."""
     # these were extracted from the mongo database
     # it's a dict for faster lookup
-    query = {
-        "source": "codewars",
-        "languages": []
-    }
+    query = {"source": "codewars", "languages": []}
     pattern = re.compile(r"^(\d{1,})(kyu|votes?|stars?)$")
 
     for w in words:

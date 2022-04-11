@@ -1,27 +1,17 @@
-.PHONY: clean test start
+.PHONY: clean format
 
 help:
-	@echo "clean - remove junk files"
-	@echo "test - run pytest"
-	@echo "start - start gunicorn in production"
+	@echo "clean - remove junk files and caches"
+	@echo "format - format all the files"
 
 clean:
+	rm -rf ./assets/dist/
+	rm -rf ./.mypy_cache/
+	rm -rf ./.parcel-cache/
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -rf {} +
 
-# -n 3 means run in parallel on three cores
-# -x means stop after first test fail
-# --lf means run only the last failing test
-# --ff means run the fail tests first
-# pytest -n 3 --cov-config=.coveragerc -x --lf
-test:
-	# Python tests
-	pytest -n 2 -x --lf
-	# Raku tests
-	cd apps/slack/command_parser/ && raku t/test-command-parser.t
-
-start:
-	make clean
-	NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program supervisord -c supervisord.conf
+format:
+	yarn format

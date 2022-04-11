@@ -7,13 +7,14 @@ can be pulled out of the JSONB.
 """
 from django.db import models
 
-from codeselfstudy.models import CreatedUpdatedModel
+from model_utils.models import TimeStampedModel
 
 
-class Language(CreatedUpdatedModel):
+class Language(TimeStampedModel):
     """
     Represents the official name of a language.
     """
+
     name = models.CharField(unique=True, max_length=100)
     description = models.TextField(
         help_text="Some markdown text about the language for its description page.",
@@ -26,7 +27,7 @@ class Language(CreatedUpdatedModel):
 
 
 # TODO: figure out if this is the right way to do it.
-class LanguageVariantName(CreatedUpdatedModel):
+class LanguageVariantName(TimeStampedModel):
     """
     Represents a variant name of a programming language. One language has
     many variant names.
@@ -35,6 +36,7 @@ class LanguageVariantName(CreatedUpdatedModel):
     c++ and cpp both refer to the same language. Perl6, Perl 6, and Raku all
     refer to the same language.
     """
+
     variant_name = models.CharField(unique=True, max_length=100)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
 

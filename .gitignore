@@ -1,8 +1,10 @@
 deploy.sh
 newrelic.ini
+.parcel-cache/
 
 # tmp files
 TMP/
+TANK/
 NOTES_TMP.md
 TMP_NOTES/
 *_PENDING_DELETION

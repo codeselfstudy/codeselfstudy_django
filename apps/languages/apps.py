@@ -2,4 +2,5 @@ from django.apps import AppConfig
 
 
 class LanguagesConfig(AppConfig):
-    name = 'languages'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "languages"

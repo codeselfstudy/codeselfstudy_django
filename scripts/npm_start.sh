@@ -1,14 +1,15 @@
 #!/bin/bash
 
+# TODO: this needs updating as soon as Django's static file system is wired up.
 
 # delete the existing build files
 echo 'removing old build'
-rm -rf ./codeselfstudy/static/dist
+rm -rf ./assets/dist/*
+
 
 # build the assets and watch for changes
 echo 'rebuilding the assets'
-npx parcel codeselfstudy/static/src/parcel-entry.js \
+npx parcel assets/src/main.js \
     --hmr-port 34471 \
-    --out-dir codeselfstudy/static/dist \
-    --public-url /static/dist/ \
-    --out-file main
+    --dist-dir assets/dist \
+    --public-url /static/dist/

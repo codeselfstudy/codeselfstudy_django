@@ -3,9 +3,10 @@ import hmac
 import time
 import hashlib
 from os import environ
+
 # from urllib.parse import parse_qs
 
-# from codeselfstudy.helpers.utils import safe_list_get
+# from helpers.utils import safe_list_get
 
 
 def verify_signature(slack_signature, ts, request_body):
@@ -29,9 +30,7 @@ def verify_signature(slack_signature, ts, request_body):
     basestring = f"v0:{ts}:{request_body}".encode("utf-8")
     # Hash the basestring using your signing secret, take the hex
     # digest, and prefix with the version number
-    my_signature = (
-        "v0=" + hmac.new(secret, basestring, hashlib.sha256).hexdigest()
-    )
+    my_signature = "v0=" + hmac.new(secret, basestring, hashlib.sha256).hexdigest()
     # # Compare the resulting signature with the signature on the request to verify the request
     if hmac.compare_digest(my_signature, slack_signature):
         return True

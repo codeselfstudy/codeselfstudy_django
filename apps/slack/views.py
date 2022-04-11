@@ -1,4 +1,5 @@
 import logging
+
 # from random import choice
 from textwrap import dedent
 
@@ -7,9 +8,10 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .signature import verify_signature
 from .helpers import is_valid_slack_app, extract_slack_payload, parse_command
+
 # from puzzles.models import Puzzle
 from puzzles.puzzles import query_to_puzzle
-from codeselfstudy.settings import DEBUG
+from django.conf import settings
 
 log = logging.getLogger(__name__)
 
@@ -17,7 +19,9 @@ log = logging.getLogger(__name__)
 @csrf_exempt
 def puzzle_slash_command(request):
     if request.method != "POST":
-        log.error(f"request to puzzle_slash_command was not a POST. Headers: {request.headers}")
+        log.error(
+            f"request to puzzle_slash_command was not a POST. Headers: {request.headers}"
+        )
         raise Http404("Not found")
 
     slack_signature = request.headers.get("X-Slack-Signature")
@@ -26,9 +30,14 @@ def puzzle_slash_command(request):
     data = request.body.decode("utf-8")
 
     # only check for Slack signatures in production
-    if DEBUG is False and (not verify_signature(slack_signature, slack_ts, data) or not is_valid_slack_app(data)):
-        log.error(f"request was POST but not valid: {request.headers} /// {request.body}")
-        return HttpResponse('Unauthorized', status=401)
+    if settings.DEBUG is False and (
+        not verify_signature(slack_signature, slack_ts, data)
+        or not is_valid_slack_app(data)
+    ):
+        log.error(
+            f"request was POST but not valid: {request.headers} /// {request.body}"
+        )
+        return HttpResponse("Unauthorized", status=401)
 
     slack_payload = extract_slack_payload(data)
     command = slack_payload.get("text")
@@ -53,12 +62,14 @@ def puzzle_slash_command(request):
 
     # TODO: parse the `data` and figure out what command to send back
     # If can parse the query and find a puzzle in the database, send it back.
-    body = dedent(f"""
+    body = dedent(
+        f"""
     Try solving this random programming puzzle. (Tip: run the command again if you want to load a different one.)
 
     *{p.title}* (difficulty: {difficulty_names[p.difficulty]})
     {p.original_url}
-    """)
+    """
+    )
 
     # TODO: get formatting ideas from https://api.slack.com/block-kit
     payload = {

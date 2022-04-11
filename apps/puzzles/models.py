@@ -1,14 +1,20 @@
 from django.db import models
-# from taggit.managers import TaggableManager
 
-from codeselfstudy.models import CreatedUpdatedModel
-from codeselfstudy.helpers.utils import create_random_slug, cook_markdown, fix_project_euler_relative_paths
+# from taggit.managers import TaggableManager
+from model_utils.models import TimeStampedModel
+
+from helpers.utils import (
+    create_random_slug,
+    cook_markdown,
+    fix_project_euler_relative_paths,
+)
 
 
 class PuzzleSources(models.TextChoices):
     """
     The site to send people to to solve the puzzle.
     """
+
     CODEWARS = "Codewars", "Codewars"
     LEETCODE = "Leetcode", "Leetcode"
     PROJECTEULER = "Project Euler", "Project Euler"
@@ -30,6 +36,7 @@ class DifficultyLevel(models.IntegerChoices):
     Euler apparently has 20 difficulty levels. Those could be mapped to our
     ranking system.
     """
+
     LEVEL_UNKNOWN = 0
     LEVEL_ONE = 1  # basic ("hello world")
     LEVEL_TWO = 2  # easy
@@ -37,7 +44,7 @@ class DifficultyLevel(models.IntegerChoices):
     LEVEL_FOUR = 4  # hard
 
 
-class Puzzle(CreatedUpdatedModel):
+class Puzzle(TimeStampedModel):
 
     title = models.CharField(max_length=200)
     is_active = models.BooleanField(default=True)
@@ -49,8 +56,7 @@ class Puzzle(CreatedUpdatedModel):
     )
 
     difficulty = models.IntegerField(
-        choices=DifficultyLevel.choices,
-        default=DifficultyLevel.LEVEL_UNKNOWN
+        choices=DifficultyLevel.choices, default=DifficultyLevel.LEVEL_UNKNOWN
     )
 
     # TODO: Don't display this anywhere because it's raw user input.
@@ -69,7 +75,7 @@ class Puzzle(CreatedUpdatedModel):
     original_url = models.URLField(
         null=True,
         blank=True,
-        help_text="If the puzzle originated somewhere else, put the full URL here"
+        help_text="If the puzzle originated somewhere else, put the full URL here",
     )
     # a dump of the original data
     original_raw_data = models.JSONField(
@@ -80,8 +86,7 @@ class Puzzle(CreatedUpdatedModel):
 
     # This prevents the same puzzle from being posted twice.
     was_seen = models.BooleanField(
-        default=False,
-        help_text="Has the puzzle been posted to Slack before?"
+        default=False, help_text="Has the puzzle been posted to Slack before?"
     )
 
     # Warning: tags won't be saved when doing `commit=False` unless you do
