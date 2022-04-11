@@ -11,7 +11,7 @@ from .helpers import is_valid_slack_app, extract_slack_payload, parse_command
 
 # from puzzles.models import Puzzle
 from puzzles.puzzles import query_to_puzzle
-from codeselfstudy.settings import DEBUG
+from django.conf import settings
 
 log = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ def puzzle_slash_command(request):
     data = request.body.decode("utf-8")
 
     # only check for Slack signatures in production
-    if DEBUG is False and (
+    if settings.DEBUG is False and (
         not verify_signature(slack_signature, slack_ts, data)
         or not is_valid_slack_app(data)
     ):

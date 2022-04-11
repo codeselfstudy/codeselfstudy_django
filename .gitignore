@@ -1,5 +1,6 @@
 deploy.sh
 newrelic.ini
+.parcel-cache/
 
 # tmp files
 TMP/
