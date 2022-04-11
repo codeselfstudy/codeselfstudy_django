@@ -22,7 +22,7 @@
         "typescript": "^4.6.3"
     },
     "dependencies": {
-        "bulma": "^0.9.3",
-        "lodash": "^4.17.21"
+        "lodash": "^4.17.21",
+        "simpledotcss": "^2.0.6"
     }
 }
