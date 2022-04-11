@@ -7,7 +7,8 @@
         "start": "./scripts/npm_start.sh",
         "build": "./scripts/npm_build.sh",
         "browserlist:update-db": "npx browserslist@latest --update-db",
-        "test": "playwright test"
+        "test": "playwright test",
+        "format": "black . && prettier --write \"**/*.{md,mdx,ts,js,jsx,tsx,yaml,yml,json}\""
     },
     "author": "Code Self Study (https://github.com/codeselfstudy)",
     "license": "BSD-3-Clause",

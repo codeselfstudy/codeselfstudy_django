@@ -1,3 +1,12 @@
+.github/
+.parcel-cache/
+.mypy_cache/
+.venv/
+dist/
+assets/dist/
+TANK/
+TMP_NOTES/
+.env
 node_modules/
 .git/
 tags
