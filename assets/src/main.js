@@ -1,2 +1,2 @@
-import "./scripts/index";
-import "./styles/index.scss";
+import "./scripts/main";
+import "./styles/main.scss";

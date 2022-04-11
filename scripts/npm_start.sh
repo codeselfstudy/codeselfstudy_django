@@ -10,5 +10,4 @@ echo 'rebuilding the assets'
 npx parcel assets/src/main.js \
     --hmr-port 34471 \
     --dist-dir assets/dist \
-    --public-url /static/dist/ #\
-    # --out-file main
+    --public-url /static/dist/
