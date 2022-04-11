@@ -3,6 +3,7 @@ newrelic.ini
 
 # tmp files
 TMP/
+TANK/
 NOTES_TMP.md
 TMP_NOTES/
 *_PENDING_DELETION
