@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "users.apps.UsersConfig",
+    "pages.apps.PagesConfig",
 ]
 
 if DEBUG is True:
@@ -87,7 +88,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 # Make custom variables available to all templates
-                "config.helpers.context_processors.add_cachebuster_to_context",
+                "helpers.context_processors.add_cachebuster_to_context",
             ],
         },
     },
