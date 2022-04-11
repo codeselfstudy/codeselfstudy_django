@@ -9,14 +9,17 @@ from codeselfstudy.helpers import utils
 log = logging.getLogger(__name__)
 
 
-class TestSafeListGet():
-    @pytest.mark.parametrize("lst, idx, default, expected", [
-        ([1, 2, 3], 0, None, 1),
-        ([1, 2, 3], 2, None, 3),
-        ([], 2, None, None),
-        ([1, 2, 3], 10, None, None),
-        ([1, 2, 3], -2, None, 2),
-    ])
+class TestSafeListGet:
+    @pytest.mark.parametrize(
+        "lst, idx, default, expected",
+        [
+            ([1, 2, 3], 0, None, 1),
+            ([1, 2, 3], 2, None, 3),
+            ([], 2, None, None),
+            ([1, 2, 3], 10, None, None),
+            ([1, 2, 3], -2, None, 2),
+        ],
+    )
     def test_safe_list_get_3_args(self, lst, idx, default, expected):
         result = utils.safe_list_get(lst, idx, default)
         assert result == expected
@@ -27,14 +30,14 @@ class TestSafeListGet():
         assert result is None
 
 
-class TestCreateRandomSlug():
+class TestCreateRandomSlug:
     def test_create_random_slug_length(self):
         """Tests that a slug is created with the correct length."""
         slug = utils.create_random_slug()
         assert len(slug) == 8
 
 
-class TestCreateEntityId():
+class TestCreateEntityId:
     def test_create_entity_id(self):
         s1 = utils.create_entity_id(1)
         s2 = utils.create_entity_id(4)
@@ -52,7 +55,7 @@ class TestCreateEntityId():
         assert isinstance(s4, str)
 
 
-class TestCleanUserInput():
+class TestCleanUserInput:
     def test_strip_bad_tags(self):
         text = """'
         <h1>hello world</h1>
@@ -113,4 +116,3 @@ class TestCleanUserInput():
 #         original_soup = BeautifulSoup(html)
 #         result = utils.fix_project_euler_relative_paths(html)
 #         soup = BeautifulSoup(html)
-

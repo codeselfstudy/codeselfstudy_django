@@ -8,6 +8,7 @@ import logging
 import bleach
 from bs4 import BeautifulSoup
 from markdown import markdown
+
 # markdown has a codehilite extension that can be enabled. If we want to try it, the docs are here:
 # https://python-markdown.github.io/extensions/code_hilite/
 # Another option is to do the syntax highlighting on the frontend.
@@ -90,7 +91,7 @@ def clean_user_input(content):
             "h6",
             "p",
         ],
-        attributes={"img": ["src"]}
+        attributes={"img": ["src"]},
     )
 
     # Just to make sure no images are loaded from anywhere other than approved
