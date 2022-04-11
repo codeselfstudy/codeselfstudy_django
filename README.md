@@ -2,58 +2,59 @@
 
 Puzzle server.
 
-**Note:** everything below might be out of date, because some things are being cleaned up.
-
 # Development
 
 ## Installation
 
 ### Python
 
-Create a Python virtual environment:
+The Python version is in the `pyproject.toml` file. You can use something like `pyenv` or Docker to manage multiple Python versions.
+
+Use Poetry to manage dependencies and the virtual environment.
+
+Examples:
+
+Run a command in the virtualenv:
 
 ```text
-$ python3 -m venv .venv
+$ poetry run python manage.py runserver
 ```
 
-Activate the virtual environment:
+Install a package:
 
 ```text
-$ source .venv/bin/activate
+$ poetry add django
 ```
 
-Install the dependencies into the virtual environment:
+Install a dev dependency:
 
 ```text
-$ pip install -r requirements/development.txt
+$ poetry add -D pytest
+```
+
+Enter a shell in the virtualenv:
+
+```text
+$ poetry shell
 ```
 
 Generate a secret key, and copy the example environment file for editing:
 
 ```text
-$ python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+$ poetry run python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+```
+
+Create the `.env` file if you don't have one:
+
+```text
 $ cp .env-example .env
 ```
 
 Open the .env file and add the secret key to the `DJANGO_SECRET_KEY` line, and fill in the `DATABASE_NAME` you want to use, and any database credentials needed.
 
-When you are finished working on the site, you can deactivate the virtual environment with:
-
-```text
-$ deactivate
-```
-
-For convenience, you can add this to your `.zshenv`, `.bashrc`, or `.aliases` file:
-
-```bash
-alias m='python manage.py'
-```
-
-If you do that, wherever you see `python manage.py` in this document, you can type `m` instead.
-
 ### Node.js
 
-Make sure you're using Node 12, and then install the dependencies. The `nvm use` command will automatically switch to Node 12 by reading the `.nvmrc` file, if you installed Node with `nvm`.
+Make sure you're using Node 16, and then install the dependencies. The `nvm use` command will automatically switch to Node 12 by reading the `.nvmrc` file, if you installed Node with `nvm`.
 
 ```text
 $ nvm use
@@ -61,6 +62,8 @@ $ npm install
 ```
 
 ### Database
+
+**NOTE:** this section might be outdated.
 
 If you don't have Postgres installed on your computer, you can run it from within a Docker container. See the [README.md](./server_development/docker/README.md) file in the `./server_development/docker/` directory.
 
@@ -72,7 +75,7 @@ $ python manage.py migrate
 
 ### Raku
 
-[`TODO:` make sure this section of the setup instructions works. This first draft is written from memory.]
+[`TODO:` remove Raku and rewrite the parser in Python.]
 
 The slash-command parser is written in a language called [Raku](https://raku.guide/#_introduction). You can install Raku with [rakubrew](https://rakubrew.org/):
 
@@ -98,6 +101,8 @@ It uses pytest. There is an intro to pytest [here](https://djangostars.com/blog/
 
 To run the tests, type:
 
+**NOTE:** this section is probably outdated.
+
 ```text
 $ make test
 ```
@@ -113,7 +118,7 @@ $ npm start
 Run the backend server by typing this in another terminal:
 
 ```text
-$ python manage.py runserver
+$ poetry run python manage.py runserver
 ```
 
 Then visit `localhost:8000`.
@@ -121,7 +126,7 @@ Then visit `localhost:8000`.
 To create a user account, run this command:
 
 ```text
-$ python manage.py createsuperuser
+$ poetry run python manage.py createsuperuser
 ```
 
 Then log in at `localhost:8000/admin/`.
@@ -137,3 +142,11 @@ If you're using VS Code and the formatting doesn't work automatically, try addin
 If you're using VS Code, it should automatically give you formatting hints. If the Python linting rules are too strict, open a Github issue with the problem and we can modify the settings. (See the `tox.ini` file.)
 
 If you use VS Code, you can also add [this extension](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig), and it will automatically follow this project's `.editorconfig` guidelines.
+
+The Python code is formatted with Black.
+
+```
+$ poetry run black .
+```
+
+TODO: automate all the code formatting.
