@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "pages.apps.PagesConfig",
     "languages.apps.LanguagesConfig",
+    "puzzles.apps.PuzzlesConfig",
 ]
 
 if DEBUG is True:
