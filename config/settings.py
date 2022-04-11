@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "pages.apps.PagesConfig",
     "languages.apps.LanguagesConfig",
     "puzzles.apps.PuzzlesConfig",
+    "slack.apps.SlackConfig",
 ]
 
 if DEBUG is True:

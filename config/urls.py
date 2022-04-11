@@ -16,9 +16,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.conf import settings
+
+# import os
+# admin_url = os.environ.get("ADMIN_URL")
+
+# handler404 = "codeselfstudy.views.not_found"
+# handler500 = "codeselfstudy.views.server_error"
+# handler403 = "codeselfstudy.views.denied"
+# handler400 = "codeselfstudy.views.bad_request"
+
 
 urlpatterns = [
+    # path(f"{admin_url}/", admin.site.urls),
     path("admin/", admin.site.urls),
     path("robots.txt", TemplateView.as_view(template_name="global/robots.txt")),
+    path("slack/", include("slack.urls")),
     path("", include("pages.urls")),
 ]
+
+
+if settings.DEBUG is True:
+    import debug_toolbar
+
+    urlpatterns.append(path("__debug__/", include(debug_toolbar.urls)))
