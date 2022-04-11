@@ -1,4 +1,5 @@
 .github/
+.cache/
 .parcel-cache/
 .mypy_cache/
 .venv/
@@ -13,3 +14,8 @@ tags
 tags.*
 dist/
 build/
+_site/
+__pycache__/
+.vim/
+.vscode/
+.idea/

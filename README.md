@@ -149,4 +149,6 @@ The Python code is formatted with Black.
 $ poetry run black .
 ```
 
+Or just run `make format` to format all the file types.
+
 TODO: automate all the code formatting.
